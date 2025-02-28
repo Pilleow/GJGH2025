@@ -1,30 +1,96 @@
-[gd_scene load_steps=4 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=8 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="3_c8ppb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
+size = Vector2(84, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
+size = Vector2(41, 466)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjm1u"]
+size = Vector2(41, 305)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut070"]
+size = Vector2(40, 40)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_y71k4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CarCollision" type="CollisionShape2D" parent="."]
+position = Vector2(1, -3)
 shape = SubResource("RectangleShape2D_2h14n")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+[node name="CarSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_vsbl2")
 
+[node name="Background" type="ColorRect" parent="."]
+z_index = -6
+offset_left = -827.0
+offset_top = -504.0
+offset_right = 753.0
+offset_bottom = 410.0
+color = Color(0, 4.51226e-09, 0.063704, 1)
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
+position = Vector2(-180, 0)
+zoom = Vector2(0.75, 0.75)
 position_smoothing_speed = 8.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -6
-offset_left = -790.0
-offset_top = -456.0
-offset_right = 790.0
-offset_bottom = 458.0
-color = Color(0, 4.51226e-09, 0.063704, 1)
+[node name="PlayerInsideContainer" type="Node2D" parent="Camera2D"]
+scale = Vector2(2.666, 2.666)
+
+[node name="ProjektantBackground" type="ColorRect" parent="Camera2D/PlayerInsideContainer"]
+offset_left = -480.0
+offset_top = -270.0
+offset_right = -120.0
+offset_bottom = 270.0
+
+[node name="SurfaceBackground" type="ColorRect" parent="Camera2D/PlayerInsideContainer"]
+offset_left = -424.0
+offset_top = -213.0
+offset_right = -132.0
+offset_bottom = 213.0
+scale = Vector2(0.84, 1)
+color = Color(0, 0.0666667, 0.152941, 1)
+
+[node name="Boundaries" type="StaticBody2D" parent="Camera2D/PlayerInsideContainer"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
+position = Vector2(-444, 0)
+shape = SubResource("RectangleShape2D_67w1b")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
+position = Vector2(-306, -233)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_jjm1u")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
+position = Vector2(-302, 233)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_jjm1u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
+position = Vector2(-159, 0)
+shape = SubResource("RectangleShape2D_67w1b")
+
+[node name="PlayerInside" type="CharacterBody2D" parent="Camera2D/PlayerInsideContainer"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_c8ppb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/PlayerInside"]
+position = Vector2(-298, 1)
+shape = SubResource("RectangleShape2D_ut070")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/PlayerInsideContainer/PlayerInside"]
+offset_left = -318.0
+offset_top = -19.0
+offset_right = -278.0
+offset_bottom = 21.0
+color = Color(0.321569, 1, 1, 1)
