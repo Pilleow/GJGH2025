@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 var car_accel = 0.0
 var car_max_accel = 2.0
-var car_speed = 100.0
-var car_max_speed = 100.0
+@export var car_speed = 400.0
+var car_max_speed = 400.0
 var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.01
