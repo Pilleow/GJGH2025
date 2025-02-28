@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr0ww0mu7dxli"]
+
+[ext_resource type="PackedScene" uid="uid://b68dhk4m7d5u4" path="res://assets/scenes/prefabs/platform.tscn" id="1_l4xyf"]
+[ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_nc23y")]
+position = Vector2(0, -21)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("1_l4xyf")]
+scale = Vector2(17.44, 1)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("1_l4xyf")]
+position = Vector2(-118, -43)
+scale = Vector2(3.84, 1)
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("1_l4xyf")]
+position = Vector2(1, -78)
+scale = Vector2(3.84, 1)
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("1_l4xyf")]
+position = Vector2(122, -108)
+scale = Vector2(3.84, 1)
+
+[node name="Platform5" parent="Platforms" instance=ExtResource("1_l4xyf")]
+position = Vector2(233, -55)
+scale = Vector2(3.84, 1)
