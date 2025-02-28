@@ -37,6 +37,13 @@ func _move(timedelta: float):
 	car_speed *= 1 - car_ground_friction
 	car_angle += steering_angle
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
+	
+	var lslidecol = get_last_slide_collision()
+	if lslidecol != null:
+		velocity *= -3
+		car_speed *= -1
+		car_accel *= -1
+	
 	move_and_slide()
 
 func _take_input():

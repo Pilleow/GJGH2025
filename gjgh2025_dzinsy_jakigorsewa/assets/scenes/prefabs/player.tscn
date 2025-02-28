@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="3_c8ppb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
-size = Vector2(84, 242)
+size = Vector2(40, 114)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
 size = Vector2(41, 466)
