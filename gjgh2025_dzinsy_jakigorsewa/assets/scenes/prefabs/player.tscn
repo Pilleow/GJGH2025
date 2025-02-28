@@ -8,6 +8,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(40, 114)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
+size = Vector2(41, 466)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjm1u"]
+size = Vector2(41, 305)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut070"]
+size = Vector2(40, 40)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_y71k4")

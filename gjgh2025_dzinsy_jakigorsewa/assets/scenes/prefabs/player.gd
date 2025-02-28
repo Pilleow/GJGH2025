@@ -43,10 +43,11 @@ func _brake(force: float):
 func _move(timedelta: float):
 	
 	car_speed += car_accel
-	
-	car_speed *= 1 - car_ground_friction	
-	car_angle += steering_angle*car_speed/car_max_speed
-	velocity = Vector2(car_speed*sin(car_angle), car_speed * cos(car_angle))
+	if abs(car_speed) > car_max_speed:
+		car_speed = car_max_speed * sign(car_speed)
+	car_speed *= 1 - car_ground_friction
+	car_angle += steering_angle
+	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
 	
 	var lslidecol = get_last_slide_collision()
 	if lslidecol != null:
