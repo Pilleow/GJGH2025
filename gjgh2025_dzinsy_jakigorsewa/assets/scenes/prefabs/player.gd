@@ -54,7 +54,12 @@ func _take_input():
 	_steer_set(rotation)
 
 func _update_camera_ahead_of_car():
-	var mod = -velocity * abs(car_speed) / car_max_speed * 0.7
+	var mod = -velocity * abs(car_speed) / car_max_speed * 0.2
+	camera.zoom = Vector2(1,1) * 0.75 - Vector2(
+		abs(car_speed) / car_max_speed * 0.2, 
+		abs(car_speed) / car_max_speed * 0.2
+	)
+	# todo ogarnac zoom z playerInside i zmienic z liniowosci
 	camera.global_position = global_position - Vector2(478.8, 0) - mod
 
 func _physics_process(delta):

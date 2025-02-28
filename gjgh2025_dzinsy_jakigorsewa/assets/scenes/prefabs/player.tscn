@@ -1,20 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=6 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
-[ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="3_c8ppb"]
+[ext_resource type="PackedScene" uid="uid://diu4q6now4xlo" path="res://assets/scenes/prefabs/player_inside.tscn" id="3_5rf1g"]
+[ext_resource type="Texture2D" uid="uid://bh65woeiuflsk" path="res://assets/sprites/character/dzialko.png" id="3_coyh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(40, 114)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
-size = Vector2(41, 466)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjm1u"]
-size = Vector2(41, 305)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut070"]
-size = Vector2(40, 40)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -27,6 +19,11 @@ shape = SubResource("RectangleShape2D_2h14n")
 [node name="CarSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_vsbl2")
+offset = Vector2(0, -60)
+
+[node name="CarTurretSprite" type="Sprite2D" parent="CarSprite"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_coyh4")
 offset = Vector2(0, -60)
 
 [node name="Background" type="ColorRect" parent="."]
@@ -42,57 +39,5 @@ position = Vector2(-478.8, 0)
 zoom = Vector2(0.75, 0.75)
 position_smoothing_speed = 8.0
 
-[node name="PlayerInsideContainer" type="Node2D" parent="Camera2D"]
-scale = Vector2(2.666, 2.666)
-
-[node name="ProjektantBackground" type="ColorRect" parent="Camera2D/PlayerInsideContainer"]
-offset_left = -480.0
-offset_top = -270.0
-offset_right = -120.0
-offset_bottom = 270.0
-
-[node name="SurfaceBackground" type="ColorRect" parent="Camera2D/PlayerInsideContainer"]
-offset_left = -424.0
-offset_top = -213.0
-offset_right = -132.0
-offset_bottom = 213.0
-scale = Vector2(0.84, 1)
-color = Color(0, 0.0666667, 0.152941, 1)
-
-[node name="Boundaries" type="StaticBody2D" parent="Camera2D/PlayerInsideContainer"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
-position = Vector2(-444, 0)
-shape = SubResource("RectangleShape2D_67w1b")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
-position = Vector2(-306, -233)
-rotation = -1.5708
-shape = SubResource("RectangleShape2D_jjm1u")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
-position = Vector2(-302, 233)
-rotation = -1.5708
-shape = SubResource("RectangleShape2D_jjm1u")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/Boundaries"]
-position = Vector2(-159, 0)
-shape = SubResource("RectangleShape2D_67w1b")
-
-[node name="PlayerInside" type="CharacterBody2D" parent="Camera2D/PlayerInsideContainer"]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("3_c8ppb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/PlayerInsideContainer/PlayerInside"]
-position = Vector2(-298, 1)
-shape = SubResource("RectangleShape2D_ut070")
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/PlayerInsideContainer/PlayerInside"]
-offset_left = -318.0
-offset_top = -19.0
-offset_right = -278.0
-offset_bottom = 21.0
-color = Color(0.321569, 1, 1, 1)
+[node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
+z_index = 4096
