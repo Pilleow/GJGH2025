@@ -20,11 +20,10 @@ func _physics_process(delta):
 	var ticks = Time.get_ticks_msec() / 1000.0
 	if ticks < time_created + pop_up_time:
 		var t = ((ticks - time_created) / pop_up_time)**(1.0/3.0)
-		print(t)
 		scale = Vector2(
 			(t) * dest_scale,
 			(t) * dest_scale
 		)
 		
 	if picked_up:
-		global_position = inside_player.global_position
+		global_position = inside_player.get_node("AnimatedSprite2DContainer").global_position
