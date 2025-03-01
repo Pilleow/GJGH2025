@@ -1,19 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=10 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
 [ext_resource type="PackedScene" uid="uid://diu4q6now4xlo" path="res://assets/scenes/prefabs/player_inside.tscn" id="3_5rf1g"]
 [ext_resource type="Texture2D" uid="uid://bh65woeiuflsk" path="res://assets/sprites/character/dzialko.png" id="3_coyh4"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/player_squash.gd" id="7_h7vgg"]
+[ext_resource type="AudioStream" uid="uid://bauigemhth4v8" path="res://assets/sounds/sfx/MotorSound.ogg" id="8_u74w8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
-size = Vector2(40, 114)
+size = Vector2(64, 189)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f53hj"]
+size = Vector2(62, 9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6e46"]
+bg_color = Color(0.756863, 0.0705882, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_y71k4")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-478.8, 0)
+zoom = Vector2(0.75, 0.75)
+position_smoothing_speed = 8.0
+
+[node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
+z_index = 2196
+
 [node name="CarCollision" type="CollisionShape2D" parent="."]
-position = Vector2(1, -32)
+z_index = -160
+position = Vector2(1, -48.5)
 shape = SubResource("RectangleShape2D_2h14n")
 
 [node name="CarSprite" type="Sprite2D" parent="."]
@@ -26,18 +50,44 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_coyh4")
 offset = Vector2(0, -60)
 
-[node name="Background" type="ColorRect" parent="."]
-z_index = -6
-offset_left = -3737.0
-offset_top = -2363.0
-offset_right = 2829.0
-offset_bottom = 2335.0
-color = Color(0, 4.51226e-09, 0.063704, 1)
+[node name="CarHitbox" type="Area2D" parent="."]
+z_index = -140
+collision_layer = 5
+collision_mask = 5
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-478.8, 0)
-zoom = Vector2(0.75, 0.75)
-position_smoothing_speed = 8.0
+[node name="CarCollision" type="CollisionShape2D" parent="CarHitbox"]
+position = Vector2(1, -48.5)
+shape = SubResource("RectangleShape2D_2h14n")
 
-[node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
-z_index = 4096
+[node name="EnemySquash" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("7_h7vgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySquash"]
+position = Vector2(1, -147.5)
+shape = SubResource("RectangleShape2D_f53hj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EnemySquash"]
+position = Vector2(1, 50)
+shape = SubResource("RectangleShape2D_f53hj")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = -762.0
+offset_top = -694.0
+offset_right = 759.0
+offset_bottom = -633.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_p6e46")
+value = 100.0
+show_percentage = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_u74w8")
+
+[connection signal="area_entered" from="CarHitbox" to="." method="_on_car_hitbox_area_entered"]
+[connection signal="body_entered" from="EnemySquash" to="EnemySquash" method="_on_body_entered"]
