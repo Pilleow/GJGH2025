@@ -115,14 +115,6 @@ func _update_camera_ahead_of_car(delta):
 			car_accel *= -0.5
 	
 	move_and_slide()
-
-func _take_input():
-	var acceleration = Input.get_axis("up", "down") * car_max_accel
-	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
-		acceleration *= 1 - ((abs(car_speed)) / car_max_speed - 0.5)
-	_accel_set(acceleration)
-	var rotation = Input.get_axis("right","left")
-	_steer_set(rotation * -1)
 	
 func _MotorSound():
 	motor_pitch = (abs(car_speed))/car_max_speed * motor_max_pitch
