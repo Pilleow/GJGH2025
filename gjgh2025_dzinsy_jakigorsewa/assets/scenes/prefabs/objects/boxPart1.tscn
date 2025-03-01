@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dj3sltwc3x54r"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/objects/box.gd" id="1_doiae"]
-[ext_resource type="Texture2D" uid="uid://cf7whv1ggukeu" path="res://assets/sprites/objects/box/skrzynia_cz3.png" id="2_4f08y"]
+[ext_resource type="Texture2D" uid="uid://cf7whv1ggukeu" path="res://assets/sprites/objects/skrzynia/skrzynia_cz3.png" id="2_4f08y"]
 
 [node name="Box" type="CharacterBody2D"]
 script = ExtResource("1_doiae")

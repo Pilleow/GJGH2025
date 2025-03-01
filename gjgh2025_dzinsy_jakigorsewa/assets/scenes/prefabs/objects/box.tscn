@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://pjkpvqmwg8g2"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/objects/box.gd" id="1_t4vss"]
-[ext_resource type="Texture2D" uid="uid://don06lxdxnlyt" path="res://assets/sprites/objects/box/skrzynia.png" id="1_tdf0b"]
+[ext_resource type="Texture2D" uid="uid://don06lxdxnlyt" path="res://assets/sprites/objects/skrzynia/skrzynia.png" id="1_tdf0b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gwl"]
 size = Vector2(158, 156)
