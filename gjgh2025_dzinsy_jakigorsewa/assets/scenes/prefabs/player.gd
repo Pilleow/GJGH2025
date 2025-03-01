@@ -114,7 +114,6 @@ func _physics_process(delta):
 	_MotorSound()
 	_take_input()
 	_move(delta)
-	_update_camera_ahead_of_car(delta)
 
 
 func _on_car_hitbox_area_entered(area):
