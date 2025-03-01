@@ -21,3 +21,5 @@ func set_type(t: String):
 		$SpeedBoostSprite2D.show()
 	elif t == "boost_turret_shooting_speed":
 		$AttackBoostSprite2D.show()
+	elif t == "defense_bubble_active":
+		$DefenceBubbleSprite2D.show()

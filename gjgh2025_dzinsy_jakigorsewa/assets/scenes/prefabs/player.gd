@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var defense_bubble_active = false
 var boost_car_speed_multiplier: float = 1.0
 
 ## drifting -------------------------
@@ -22,7 +23,7 @@ var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
-var max_hp: float = 1000.0
+var max_hp: float = 10.0
 var hp: float = max_hp
 
 var steering_angle = 0.0
@@ -42,9 +43,12 @@ var player_speed_interval = player_speed_interval_default
 @onready var carCollider: CollisionShape2D = $CarCollision
 @onready var pl2df: PointLight2D = $PointLight2DFront
 @onready var carSprite: Sprite2D = $CarSprite
+@onready var defenseBubble = $CarSprite/DefenseBubble
 @onready var carHitbox: Area2D = $CarHitbox
 @onready var camera: Camera2D = $Camera2D
 @onready var hpBar: ProgressBar = $UI/ProgressBar
+
+@export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
 	show()
@@ -57,8 +61,15 @@ func _steer_set(sang: float):
 
 func _become_dead():
 	hide()
+	get_tree().change_scene_to_file(deadScenePath)
 
 func take_damage(damage: float):
+	if defense_bubble_active:
+		defense_bubble_active = false
+		damage /= 2.0
+		damage = float(int(damage))
+		defenseBubble.hide()
+	print(damage)
 	hp -= damage
 	if hp <= 0:
 		_become_dead()

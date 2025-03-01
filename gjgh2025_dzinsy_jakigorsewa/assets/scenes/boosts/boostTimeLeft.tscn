@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://8qdifidrebcb"]
+[gd_scene load_steps=7 format=3 uid="uid://8qdifidrebcb"]
 
 [ext_resource type="Script" path="res://assets/scenes/boosts/boost_time_left.gd" id="1_rs8de"]
 [ext_resource type="Texture2D" uid="uid://ss66wwwotvvn" path="res://assets/sprites/objects/boost3.png" id="2_6758j"]
 [ext_resource type="Texture2D" uid="uid://1s5hnsl44lq6" path="res://assets/sprites/objects/boost4.png" id="3_to8qs"]
+[ext_resource type="Texture2D" uid="uid://covaj7h5odfv1" path="res://assets/sprites/objects/boost2.png" id="4_pg12m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v52y8"]
 bg_color = Color(0.133333, 0.129412, 0.141176, 1)
@@ -35,6 +36,11 @@ texture = ExtResource("2_6758j")
 visible = false
 z_index = 2845
 texture = ExtResource("3_to8qs")
+
+[node name="DefenceBubbleSprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 2845
+texture = ExtResource("4_pg12m")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 4096

@@ -14,8 +14,6 @@ var able_to_pickup_boost_location: int = 0
 var able_to_put_boost_in_engine: bool = false
 var current_holding_boost = null
 var current_active_boosts = [
-	["car_boost", 2.0, 2.0], 
-	["attack_speed", 1.5, 2.0]
 ]  # [type, time left, total time]
 
 @export_file("*.tscn") var boostTimerBarPath = ""
@@ -76,6 +74,9 @@ func _update_existing_boost_effects():
 			# this should only boost the speed when the car player holds down a TURBO button!
 		elif eff[0] == "boost_turret_shooting_speed":
 			boost_turret_shooting_speed = 2.0
+		elif eff[0] == "defense_bubble_active":
+			car.defense_bubble_active = true
+			car.defenseBubble.show()
 
 func _update_boost_clocks(delta):
 	for index in len(current_active_boosts):
@@ -128,7 +129,8 @@ func _toggle_sit_down():
 func _put_boost_in_engine():
 	var time = {
 		"boost_car_speed_multiplier": 5.0,
-		"boost_turret_shooting_speed": 6.0
+		"boost_turret_shooting_speed": 6.0,
+		"defense_bubble_active": 1.0
 	}[current_holding_boost.boost_type]
 	add_boost_to_car(current_holding_boost.boost_type, time)
 	current_holding_boost.call_deferred("queue_free")
