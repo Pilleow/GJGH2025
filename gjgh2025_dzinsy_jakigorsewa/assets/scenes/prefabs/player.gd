@@ -111,7 +111,8 @@ func _move(timedelta: float):
 	
 	velocity.x = car_speed * sin(car_angle) + push_velocity.x;
 	velocity.y = car_speed * cos(car_angle) + push_velocity.y;
-	velocity = velocity.normalized()* (-car_speed);
+
+	velocity = velocity.normalized()* abs(car_speed);
 	#var lslidecol = get_last_slide_collision()
 	#if lslidecol != null:
 		#if lslidecol.get_collider() is TileMapLayer:
