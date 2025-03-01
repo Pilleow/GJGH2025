@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://coj2g5ph0e5c4"]
+[gd_scene load_steps=4 format=3 uid="uid://coj2g5ph0e5c4"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/bullet.gd" id="1_0c8vf"]
+[ext_resource type="Texture2D" uid="uid://dd5kdsj3tf5xy" path="res://assets/sprites/objects/kula.png" id="2_vb8c0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khtfd"]
-radius = 12.0416
+radius = 9.0
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_0c8vf")
@@ -14,10 +15,8 @@ script = ExtResource("1_0c8vf")
 z_index = 3475
 shape = SubResource("CircleShape2D_khtfd")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 620
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-color = Color(0.432667, 0.26, 1, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.115118, 0.196972)
+scale = Vector2(0.243793, 0.243793)
+texture = ExtResource("2_vb8c0")
+offset = Vector2(-2.225, -3.11)
