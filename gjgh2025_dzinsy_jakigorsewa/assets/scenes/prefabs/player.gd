@@ -4,8 +4,8 @@ var boost_car_speed_multiplier: float = 1.0
 
 ## drifting -------------------------
 var push_force = 0.0
-var push_force_max = 10;
-var drift_brake_speed = 5.0;
+var push_force_max = 200
+var drift_brake_speed = 6.0;
 var push_velocity = Vector2.ZERO;
 var drifting = false;
 
@@ -82,27 +82,35 @@ func _move(timedelta: float):
 	angle1 = rad_to_deg(car_angle);
 	car_angle += 2*steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
-	
+	print(car_speed)
 	if(drifting and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))):
 		car_speed -= drift_brake_speed *sign(car_speed)
-		
+		#* car_speed / car_max_speed;
 		if(car_speed >= 0):
-			push_force = push_force_max * car_speed / car_max_speed;
+			if(push_force <= push_force_max):
+				push_force += 20;
+			else:
+				push_force = push_force_max 
 		else:
-			push_force -= push_force_max;
+			if(push_force >= push_force_max):
+				push_force -= 20;
+			else:
+				push_force = (-push_force_max)
+			push_force = -push_force_max ;
 			
 		if(angle1 - prev_angle1 > 0):
 			push_velocity = Vector2(push_force* sin(car_angle - PI/2), push_force * cos(car_angle - PI/2));
 		else:
 			push_velocity = Vector2(push_force* sin(car_angle + PI/2), push_force * cos(car_angle + PI/2));
 	else:
-		push_force = 0;
+		if push_force != 0:
+			push_force -= sign(push_force)*75	
 		push_velocity = Vector2.ZERO
-	
+		
 	velocity.x = car_speed * sin(car_angle) + push_velocity.x;
 	velocity.y = car_speed * cos(car_angle) + push_velocity.y;
-
 	velocity = velocity.normalized()* abs(car_speed);
+
 	
 	#var lslidecol = get_last_slide_collision()
 	#if lslidecol != null:
