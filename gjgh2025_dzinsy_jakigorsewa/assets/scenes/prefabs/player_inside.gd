@@ -83,7 +83,7 @@ func _shoot_bullet(speed: float):
 		turretSprite.position.x + dx,
 		turretSprite.position.y - dy
 	)
-	b.global_position = turretSprite.global_position + Vector2(dx, dy) * 80.0
+	b.global_position = turretSprite.global_position + Vector2(dx, -dy) * 80.0
 	b.set_speed(speed)
 	b.set_target_vector(tv)
 	print(turret_rotation)
