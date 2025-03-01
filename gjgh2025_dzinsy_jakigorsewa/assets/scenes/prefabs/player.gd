@@ -85,7 +85,7 @@ func _take_input():
 	_steer_set(rotation)
 
 func _update_camera_ahead_of_car(delta):
-	var mult = 0.08
+	var mult = 0.03
 	var mod = -velocity * abs(car_speed) / car_max_speed * mult
 	var target_zoom = Vector2(1,1) * 0.75 - Vector2(
 		abs(car_speed) / car_max_speed * mult, 

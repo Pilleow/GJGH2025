@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://dr0ww0mu7dxli"]
+[gd_scene load_steps=6 format=4 uid="uid://dr0ww0mu7dxli"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
-[ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="3_aimgs"]
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="3_qlpo8"]
 [ext_resource type="Texture2D" uid="uid://b5loktdwhky8h" path="res://assets/sprites/character/background.png" id="5_j1ga3"]
 
@@ -25,35 +24,8 @@ tile_set = ExtResource("2_u7lgk")
 position = Vector2(-413.5, -3065.5)
 shape = SubResource("RectangleShape2D_72rgs")
 
-[node name="Node2D" parent="." instance=ExtResource("3_aimgs")]
-position = Vector2(-1297, -2504)
-
-[node name="Node2D4" parent="." instance=ExtResource("3_aimgs")]
-position = Vector2(252, -2678)
-
-[node name="Node2D3" parent="." instance=ExtResource("3_aimgs")]
-position = Vector2(1002, -1542)
-
-[node name="Node2D2" parent="." instance=ExtResource("3_aimgs")]
-position = Vector2(-1322, -1170)
-
-[node name="Node2D5" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(-1102, -1525)
-
 [node name="Node2D6" parent="." instance=ExtResource("3_qlpo8")]
 position = Vector2(-99, -1341)
-
-[node name="Node2D7" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(149, -1411)
-
-[node name="Node2D8" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(-486, -681)
-
-[node name="Node2D10" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(1089, -533)
-
-[node name="Node2D11" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(-425, -2647)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -185

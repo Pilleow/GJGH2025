@@ -18,11 +18,11 @@ bullet_path = "res://assets/scenes/prefabs/enemyRadarBullet.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy1"]
 z_index = 85
 position = Vector2(0, -6)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_u3du0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy1"]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("1_wp0r1")
 animation = &"shooting"
 
@@ -31,7 +31,7 @@ animation = &"shooting"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy1/Hitbox"]
 z_index = 85
 position = Vector2(0, -6)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_u3du0")
 
 [connection signal="area_entered" from="Enemy1/Hitbox" to="Enemy1" method="_on_hitbox_area_entered"]

@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var max_hp: float = 3.0
+@export var max_hp: float = 6.0
 @export var shooting_range: float = 2000.0
 @export_file("*.tscn") var bullet_path = ""
 @onready var bullet = load(bullet_path)
-@export var bullet_damage: float = 1.0
-@export var bullet_speed: float = 8.0
-@export var shooting_cooldown_default: float = 0.4
-@export var min_allowed_distance_to_player: float = 200.0
+@export var bullet_damage: float = 4.0
+@export var bullet_speed: float = 4.0
+@export var shooting_cooldown_default: float = 0.9
+@export var min_allowed_distance_to_player: float = 300.0
 
 var hp = max_hp
 var enemy_speed: float = 200.0
@@ -34,9 +34,10 @@ var playingShootAnimation: bool = false
 var stateTimeLeft: float = -1.0
 var currentState = "walk"
 var stateMachine = {
-	"walk": 2.5,
-	"shoot": 1.5
+	"walk": 2.0,
+	"shoot": 3.0
 }
+
 func _check_and_change_state(delta: float):
 	if not player_visible:
 		return
@@ -85,7 +86,6 @@ func _shoot(delta):
 	b.set_damage(bullet_damage)
 	b.set_speed(bullet_speed)
 	b.set_target_vector(tv)
-	b.global_rotation = global_position.angle_to_point(player.global_position) + PI/2
 	get_tree().current_scene.add_child(b)
 	
 func _become_dead():
@@ -104,12 +104,13 @@ func take_damage(damage: float):
 
 func _move(disable_voluntary_movement: bool = false):
 	var move_to = Vector2.ZERO
-	if global_position.distance_to(carCollider.global_position) <= min_allowed_distance_to_player:
+	var shouldMove = global_position.distance_to(carCollider.global_position) > min_allowed_distance_to_player
+	if not shouldMove:
 		stateTimeLeft = -1
 	else:
 		move_to = (player.global_position - global_position).normalized()  * enemy_speed
-	if not player_visible:
-		return
+	#if not player_visible:
+		#return
 	if not disable_voluntary_movement:
 		enemy_move = move_to.normalized()
 	else:
@@ -130,10 +131,7 @@ func _check_player_visibility():
 		[self]
 	))
 	var c = result.get("collider")
-	if c and c.name == "Player":
-		player_visible = true
-	else:
-		player_visible = false
+	player_visible = c and c.name == "Player"
 
 func _physics_process(delta):
 	if is_dead:
@@ -141,7 +139,6 @@ func _physics_process(delta):
 		return
 	check_player_visibility_every_seconds -= delta
 	if check_player_visibility_every_seconds < 0:
-		print(player_visible)
 		check_player_visibility_every_seconds = check_player_visibility_every_seconds_default
 		_check_player_visibility()
 	if playingShootAnimation and not animSprite.is_playing():
