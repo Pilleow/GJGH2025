@@ -3,9 +3,9 @@ extends CharacterBody2D
 var car_angle = 0.0
 
 var car_accel = 0.0
-var car_max_accel = 15.0
+var car_max_accel = 20.0
 var car_speed = 0.0
-var car_max_speed = 1500.0
+var car_max_speed = 1000.0
 var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.01
@@ -29,12 +29,8 @@ var player_speed_interval = player_speed_interval_default
 func _steer_set(sang: float):
 	if sang < steering_angle_limit[0] or sang > steering_angle_limit[1]:
 		return false
-	steering_angle = sang / 20
-	return true# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
+	steering_angle = move_toward(steering_angle, sang / 17, 0.005)
+	return true
 
 func _accel_set(acc: float):
 	car_accel = acc
