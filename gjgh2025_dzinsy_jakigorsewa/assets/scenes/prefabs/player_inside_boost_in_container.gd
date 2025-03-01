@@ -33,7 +33,8 @@ var boost_spawn_4_current_boost = null
 
 @onready var available_boosts_to_spawn = [
 	"boost_car_speed_multiplier",
-	"boost_turret_shooting_speed"
+	"boost_turret_shooting_speed",
+	"defense_bubble_active"
 ]
 
 var time_every_boost_coming_in = 1.0
