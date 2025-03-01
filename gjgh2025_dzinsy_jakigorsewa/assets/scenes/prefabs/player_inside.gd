@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-const SPEED = 650.0
+var boost_turret_shooting_speed: float = 1.0
 
+var speed = 650.0
 var turret_rotation: float = 0.0
 var turret_rotation_max_speed: float = 0.1
 
@@ -10,6 +11,10 @@ var sat_down: bool = false
 
 var able_to_put_boost_in_engine: bool = false
 var current_equipped_boost = ""
+var current_active_boosts = [
+	["car_boost", 2.0], 
+	["attack_speed", 1.5]
+]
 
 @export_file("*.tscn") var bulletPath = ""
 @onready var bullet: PackedScene = load(bulletPath)
@@ -24,10 +29,12 @@ var bullet_damage = 2.0
 @onready var animSprite: AnimatedSprite2D = $AnimatedSprite2DContainer/AnimatedSprite2D
 @onready var animSpriteContainer: Node2D = $AnimatedSprite2DContainer
 @onready var turretChairSprite: Node2D = get_parent().get_node("TurretChair").get_node("AnimatedSprite2D")
+@onready var car: CharacterBody2D = null
 
 func _ready():
 	turretSprite = get_tree().current_scene.find_child("CarTurretSprite")
 	turretChairSprite.play("empty")
+	car = get_tree().current_scene.find_child("Player")
 
 func _move_turret():
 	if not turretSprite:
@@ -45,17 +52,40 @@ func _move_turret():
 	#turret_rotation += x_direction
 	#turretSprite.global_rotation = turret_rotation * turret_rotation_max_speed
 
+func add_boost_to_car(boost: String, time: float):
+	current_active_boosts.append([boost, time])
+	_update_existing_boost_effects()
+
+func _update_existing_boost_effects():
+	car.boost_car_speed_multiplier = 1.0
+	boost_turret_shooting_speed = 1.0
+	
+	for eff in current_active_boosts:
+		if eff[0] == "boost_car_speed_multiplier":
+			car.boost_car_speed_multiplier = 2.0
+			# this should only boost the speed when the car player holds down a TURBO button!
+		elif eff[0] == "boost_turret_shooting_speed":
+			boost_turret_shooting_speed = 2.0
+
+func _update_boost_clocks(delta):
+	for index in len(current_active_boosts):
+		var index_inv = len(current_active_boosts) - index - 1
+		current_active_boosts[index_inv][1] -= delta
+		if current_active_boosts[index_inv][1] <= 0:
+			current_active_boosts.remove_at(index_inv)
+			_update_existing_boost_effects()
+
 func _move_person():
 	var y_direction = Input.get_axis("designer_up", "designer_down")
 	if y_direction:
-		velocity.y = move_toward(velocity.y, y_direction * SPEED, SPEED/3)
+		velocity.y = move_toward(velocity.y, y_direction * speed, speed/3)
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED/2)
+		velocity.y = move_toward(velocity.y, 0, speed/3)
 	var x_direction = Input.get_axis("designer_left", "designer_right")
 	if x_direction:
-		velocity.x = move_toward(velocity.x, x_direction * SPEED, SPEED/3)
+		velocity.x = move_toward(velocity.x, x_direction * speed, speed/3)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED/2)
+		velocity.x = move_toward(velocity.x, 0, speed/3)
 	if abs(x_direction) > 0.01 or abs(y_direction) > 0.01:
 		animSprite.play("walking")
 		var lkat = Vector2(
@@ -118,6 +148,7 @@ func _physics_process(delta):
 		shooting_cooldown -= delta
 	_move(delta)
 	_update_interact_label()
+	_update_boost_clocks(delta)
 	if Input.is_action_just_pressed("designer_interact"):
 		_interact_with_environent()
 	if sat_down:

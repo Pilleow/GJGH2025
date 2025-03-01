@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var boost_car_speed_multiplier: float = 1.0
+
 var car_angle = 0.0
 var car_accel = 0.0
 var car_max_accel = 5.0

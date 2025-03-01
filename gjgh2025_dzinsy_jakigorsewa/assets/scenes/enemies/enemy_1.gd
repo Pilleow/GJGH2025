@@ -144,7 +144,6 @@ func _physics_process(delta):
 		return
 	check_player_visibility_every_seconds -= delta
 	if check_player_visibility_every_seconds < 0:
-		print(player_visible)
 		check_player_visibility_every_seconds = check_player_visibility_every_seconds_default
 		_check_player_visibility()
 	if playingShootAnimation and not animSprite.is_playing():
