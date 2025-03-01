@@ -17,8 +17,10 @@ func set_type(t: String):
 		$AttackBoostSprite2D.show()
 
 func _physics_process(delta):
-	if time_created < pop_up_time:
-		var t = pop_up_time - time_created
+	var ticks = Time.get_ticks_msec() / 1000.0
+	if ticks < time_created + pop_up_time:
+		var t = ((ticks - time_created) / pop_up_time)**(1.0/3.0)
+		print(t)
 		scale = Vector2(
 			(t) * dest_scale,
 			(t) * dest_scale

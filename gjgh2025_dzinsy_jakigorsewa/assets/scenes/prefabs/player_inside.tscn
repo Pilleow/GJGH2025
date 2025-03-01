@@ -75,7 +75,7 @@ position = Vector2(-133.158, -1.15866)
 shape = SubResource("RectangleShape2D_67w1b")
 
 [node name="PlayerInside" type="CharacterBody2D" parent="."]
-z_index = 1030
+z_index = 4096
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_t53x0")
@@ -101,10 +101,11 @@ text = "[X] Text Here"
 horizontal_alignment = 1
 
 [node name="AnimatedSprite2DContainer" type="Node2D" parent="PlayerInside"]
+z_index = 4096
 position = Vector2(-297.824, 1.12528)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerInside/AnimatedSprite2DContainer"]
-z_index = 1390
+z_index = 4096
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_bhpyp")
@@ -271,4 +272,11 @@ show_percentage = false
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]
 [connection signal="body_entered" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_entered"]
 [connection signal="body_exited" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_exited"]
-[connection signal="body_entered" from="BoostInContainer/BoostIn1/BoostInArea2D" to="BoostInContainer" method="_on_boost_in_area_2d_body_entered"]
+[connection signal="body_entered" from="BoostInContainer/BoostIn1/BoostInArea2D" to="PlayerInside" method="_on_boost1_in_area_2d_body_entered"]
+[connection signal="body_exited" from="BoostInContainer/BoostIn1/BoostInArea2D" to="PlayerInside" method="_on_boost1_in_area_2d_body_exited"]
+[connection signal="body_entered" from="BoostInContainer/BoostIn2/BoostInArea2D" to="PlayerInside" method="_on_boost2_in_area_2d_body_entered"]
+[connection signal="body_exited" from="BoostInContainer/BoostIn2/BoostInArea2D" to="PlayerInside" method="_on_boost2_in_area_2d_body_exited"]
+[connection signal="body_entered" from="BoostInContainer/BoostIn3/BoostInArea2D" to="PlayerInside" method="_on_boost3_in_area_2d_body_entered"]
+[connection signal="body_exited" from="BoostInContainer/BoostIn3/BoostInArea2D" to="PlayerInside" method="_on_boost3_in_area_2d_body_exited"]
+[connection signal="body_entered" from="BoostInContainer/BoostIn4/BoostInArea2D" to="PlayerInside" method="_on_boost4_in_area_2d_body_entered"]
+[connection signal="body_exited" from="BoostInContainer/BoostIn4/BoostInArea2D" to="PlayerInside" method="_on_boost4_in_area_2d_body_exited"]
