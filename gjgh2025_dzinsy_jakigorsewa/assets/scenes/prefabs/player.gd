@@ -5,7 +5,7 @@ var car_angle = 0.0
 var car_accel = 0.0
 var car_max_accel = 15.0
 var car_speed = 0.0
-var car_max_speed = 500.0
+var car_max_speed = 1500.0
 var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.01
@@ -18,6 +18,10 @@ var motor_pitch = 1.0
 var motor_pitch_scaled = 100
 var motor_max_pitch = 2.5;
 var motor_gears = 1
+
+var player_past_speeds = [0.0]
+var player_speed_interval_default = 0.1
+var player_speed_interval = player_speed_interval_default
 
 @onready var carCollider: CollisionShape2D = $CarCollision
 @onready var carSprite: Sprite2D = $CarSprite
@@ -45,26 +49,29 @@ func _move(timedelta: float):
 	car_speed += car_accel
 	if abs(car_speed) > car_max_speed:
 		car_speed = car_max_speed * sign(car_speed)
-	car_speed *= 1 - car_ground_friction
-	car_angle += steering_angle
+
+	if car_accel == 0:
+		car_speed *= 1 - car_ground_friction
+	car_angle += steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
 	
 	var lslidecol = get_last_slide_collision()
 	if lslidecol != null:
-		velocity *= -3
-		car_speed *= -1
-		car_accel *= -1
+		velocity *= -2
+		car_speed *= -0.5
+		car_accel *= -0.5
 	
 	move_and_slide()
 
 func _take_input():
 	var acceleration = Input.get_axis("up", "down") * car_max_accel
+	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
+		acceleration *= 1 - ((abs(car_speed)) / car_max_speed - 0.5)
 	_accel_set(acceleration)
-	var rotation = Input.get_axis( "right","left")
+	var rotation = Input.get_axis("right","left")
 	_steer_set(rotation * -1)
 	
 func _MotorSound():
-	
 	motor_pitch = (abs(car_speed))/car_max_speed * motor_max_pitch
 	motor_pitch_scaled = (int(abs(car_speed) / 8)) % 60 + 60
 	print(motor_pitch_scaled)
@@ -82,10 +89,12 @@ func _MotorSound():
 	if not $AudioStreamPlayer2D.playing:
 		$AudioStreamPlayer2D.play()
 
+
 	
 func _physics_process(delta):
 	carCollider.rotation = -car_angle
 	carSprite.rotation = -car_angle
+	carCollider.position = carSprite.position + Vector2(sin(car_angle), cos(car_angle)) * (-48.5)
 	_MotorSound()
 	_take_input()
 	_move(delta)

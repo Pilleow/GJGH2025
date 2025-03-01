@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://102nro1wij3w"]
+
+[ext_resource type="Texture2D" uid="uid://dw85lrlilqgf4" path="res://assets/sprites/character/krzeslo.png" id="1_cictt"]
+[ext_resource type="Texture2D" uid="uid://borcutvmaxs4i" path="res://assets/sprites/character/krzeslo1.png" id="2_flg2j"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cictt")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_flg2j")
+}],
+"loop": true,
+"name": &"sitting",
+"speed": 5.0
+}]
