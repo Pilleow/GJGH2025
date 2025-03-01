@@ -17,7 +17,6 @@ func _ready():
 func hit_and_knockback(damage: float, knockback_power: float):
 	health -= damage
 	knockback_move = -player.velocity.normalized() * knockback_power 
-	print(knockback_move)
 
 func _set_target_move_to(to: Vector2):
 	rotate_around_point.global_position -= to * enemy_speed
