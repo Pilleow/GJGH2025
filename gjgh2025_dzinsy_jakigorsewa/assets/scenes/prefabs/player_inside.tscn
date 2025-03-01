@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://diu4q6now4xlo"]
+[gd_scene load_steps=12 format=3 uid="uid://diu4q6now4xlo"]
 
+[ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside_container.gd" id="1_duc1h"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="1_t53x0"]
 [ext_resource type="Texture2D" uid="uid://c83um0ysvt7g0" path="res://assets/sprites/other/tlo.png" id="2_1xe42"]
 [ext_resource type="SpriteFrames" uid="uid://b2qkags0xceuf" path="res://assets/animations/personAS.tres" id="2_bhpyp"]
@@ -24,7 +25,9 @@ size = Vector2(63.0148, 43.5118)
 size = Vector2(85.769, 84.7712)
 
 [node name="PlayerInsideContainer" type="Node2D"]
+visible = false
 scale = Vector2(2.666, 2.666)
+script = ExtResource("1_duc1h")
 
 [node name="ProjektantBackground" type="ColorRect" parent="."]
 offset_left = -725.0

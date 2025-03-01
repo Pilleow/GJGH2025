@@ -32,6 +32,8 @@ var player_speed_interval = player_speed_interval_default
 @onready var camera: Camera2D = $Camera2D
 @onready var hpBar: ProgressBar = $UI/ProgressBar
 
+func _ready():
+	show()
 
 func _steer_set(sang: float):
 	if sang < steering_angle_limit[0] or sang > steering_angle_limit[1]:
