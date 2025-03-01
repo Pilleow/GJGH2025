@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://b2qkags0xceuf"]
+
+[ext_resource type="Texture2D" uid="uid://biblg6awp0omu" path="res://assets/sprites/character/postac1.png" id="1_bfudn"]
+[ext_resource type="Texture2D" uid="uid://co4rgsnv41g3x" path="res://assets/sprites/character/postac3.png" id="2_x6ywj"]
+[ext_resource type="Texture2D" uid="uid://c5co6goaqrnlx" path="res://assets/sprites/character/postac4.png" id="3_ytoex"]
+[ext_resource type="Texture2D" uid="uid://b8e1ydwm3pxuo" path="res://assets/sprites/character/postac5.png" id="4_3td86"]
+[ext_resource type="Texture2D" uid="uid://8eurs3ssy7u5" path="res://assets/sprites/character/postac6.png" id="5_8nrwv"]
+[ext_resource type="Texture2D" uid="uid://c4j8iggrkvxxi" path="res://assets/sprites/character/postac7.png" id="6_qg2du"]
+[ext_resource type="Texture2D" uid="uid://c4dvjoo0p5bgw" path="res://assets/sprites/character/postac8.png" id="7_mme7g"]
+[ext_resource type="Texture2D" uid="uid://bv000ggoj7h01" path="res://assets/sprites/character/postac2.png" id="8_1a3pi"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bfudn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_1a3pi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x6ywj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ytoex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3td86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8nrwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qg2du")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mme7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_bfudn")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 8.0
+}]

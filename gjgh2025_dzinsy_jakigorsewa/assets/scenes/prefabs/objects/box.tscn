@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjkpvqmwg8g2"]
+
+[ext_resource type="Script" path="res://assets/scenes/prefabs/objects/box.gd" id="1_t4vss"]
+[ext_resource type="Texture2D" uid="uid://don06lxdxnlyt" path="res://assets/sprites/objects/box/skrzynia.png" id="1_tdf0b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gwl"]
+size = Vector2(158, 156)
+
+[node name="Box" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_t4vss")
+boxPart1Path = "res://assets/scenes/prefabs/objects/boxPart1.tscn"
+boxPart2Path = "res://assets/scenes/prefabs/objects/boxPart2.tscn"
+boxPart3Path = "res://assets/scenes/prefabs/objects/boxPart3.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tdf0b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b2gwl")
