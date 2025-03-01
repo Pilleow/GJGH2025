@@ -85,20 +85,12 @@ func _move(timedelta: float):
 	
 	if(drifting and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))):
 		car_speed -= drift_brake_speed *sign(car_speed)
-		#if(push_force < push_force_max):
-			#if(car_speed >= 0):
-				#push_force += 10;
-			#else:
-				#push_force -= 10;
-		#else:
+		
 		if(car_speed >= 0):
 			push_force = push_force_max * car_speed / car_max_speed;
 		else:
 			push_force -= push_force_max;
-	#
-		#if(Input.is_action_pressed("rigth")):
-			#push_velocity = Vector2( push_force * sin(car_angle + PI/2), push_force* cos(car_angle + PI/2));
-		#if(Input.is_action_pressed("left")):$
+			
 		if(angle1 - prev_angle1 > 0):
 			push_velocity = Vector2(push_force* sin(car_angle - PI/2), push_force * cos(car_angle - PI/2));
 		else:
@@ -111,6 +103,7 @@ func _move(timedelta: float):
 	velocity.y = car_speed * cos(car_angle) + push_velocity.y;
 
 	velocity = velocity.normalized()* abs(car_speed);
+	
 	#var lslidecol = get_last_slide_collision()
 	#if lslidecol != null:
 		#if lslidecol.get_collider() is TileMapLayer:
