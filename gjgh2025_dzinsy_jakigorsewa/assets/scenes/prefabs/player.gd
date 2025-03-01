@@ -9,6 +9,9 @@ var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.01
 
+var max_hp: float = 1000.0
+var hp: float = max_hp
+
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]
 var wheel_angle_limit = [-90.0, 90.0]
@@ -20,13 +23,25 @@ var player_speed_interval = player_speed_interval_default
 @onready var carSquashFront: Area2D = $EnemySquash
 @onready var carCollider: CollisionShape2D = $CarCollision
 @onready var carSprite: Sprite2D = $CarSprite
+@onready var carHitbox: Area2D = $CarHitbox
 @onready var camera: Camera2D = $Camera2D
+@onready var hpBar: ProgressBar = $UI/ProgressBar
+
 
 func _steer_set(sang: float):
 	if sang < steering_angle_limit[0] or sang > steering_angle_limit[1]:
 		return false
 	steering_angle = move_toward(steering_angle, sang / 17, 0.005)
 	return true
+
+func _become_dead():
+	hide()
+
+func take_damage(damage: float):
+	hp -= damage
+	if hp <= 0:
+		_become_dead()
+	hpBar.value = hp / max_hp * 100.0
 
 func _accel_set(acc: float):
 	car_accel = acc
@@ -86,7 +101,17 @@ func _physics_process(delta):
 	carCollider.rotation = -car_angle
 	carSprite.rotation = -car_angle
 	carSquashFront.rotation = -car_angle
+	carHitbox.rotation = -car_angle
 	carCollider.position = carSprite.position + Vector2(sin(car_angle), cos(car_angle)) * (-48.5)
 	_take_input()
 	_move(delta)
 	_update_camera_ahead_of_car(delta)
+
+
+func _on_car_hitbox_area_entered(area):
+	var par = area.get_parent()
+	if not par:
+		return
+	if par.is_in_group("HurtingEntities"):
+		take_damage(par.get_damage_dealt())
+		par.call_deferred("queue_free")

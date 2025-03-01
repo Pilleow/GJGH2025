@@ -61,7 +61,7 @@ z_index = 290
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_t53x0")
-bulletPath = "res://assets/scenes/prefabs/bullet.tscn"
+bulletPath = "res://assets/scenes/prefabs/playerBullet.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInside"]
 z_index = 2095

@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://coj2g5ph0e5c4"]
 
-[ext_resource type="Script" path="res://assets/scenes/prefabs/bullet.gd" id="1_0c8vf"]
-[ext_resource type="Texture2D" uid="uid://dd5kdsj3tf5xy" path="res://assets/sprites/objects/kula.png" id="2_vb8c0"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/bullet.gd" id="1_ygalc"]
+[ext_resource type="Texture2D" uid="uid://bansoms64mgsb" path="res://assets/sprites/objects/kulac.png" id="2_4o3qy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khtfd"]
-radius = 9.0
+radius = 12.0416
 
-[node name="Bullet" type="Node2D"]
-script = ExtResource("1_0c8vf")
+[node name="PlayerBullet" type="Node2D"]
+script = ExtResource("1_ygalc")
+group = "PlayerDamageEntities"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -16,7 +17,8 @@ z_index = 3475
 shape = SubResource("CircleShape2D_khtfd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 575
 position = Vector2(0.115118, 0.196972)
 scale = Vector2(0.243793, 0.243793)
-texture = ExtResource("2_vb8c0")
+texture = ExtResource("2_4o3qy")
 offset = Vector2(-2.225, -3.11)
