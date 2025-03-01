@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=11 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
@@ -11,21 +11,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(64, 189)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_blaov"]
-
-[sub_resource type="GDScript" id="GDScript_f6yg6"]
-script/source = "extends RigidBody2D
-
-
-func _physics_process(delta):
-	for body in get_colliding_bodies():
-		if body is RigidBody2D:
-			var force_direction = get_parent().velocity
-			body.apply_force(force_direction * 500)
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f53hj"]
-size = Vector2(48, 14)
+size = Vector2(62, 9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6e46"]
+bg_color = Color(0.756863, 0.0705882, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -33,7 +28,16 @@ collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_y71k4")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-478.8, 0)
+zoom = Vector2(0.75, 0.75)
+position_smoothing_speed = 8.0
+
+[node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
+z_index = 3761
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = -25
 texture_repeat = 3
 scale = Vector2(1.31568, 1.31568)
@@ -56,23 +60,19 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_coyh4")
 offset = Vector2(0, -60)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-478.8, 0)
-zoom = Vector2(0.75, 0.75)
-position_smoothing_speed = 8.0
-
-[node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
-z_index = 3761
-
 [node name="CarCollider" type="RigidBody2D" parent="."]
 collision_layer = 5
 collision_mask = 5
 mass = 10000.0
-physics_material_override = SubResource("PhysicsMaterial_blaov")
 gravity_scale = 0.0
-script = SubResource("GDScript_f6yg6")
 
 [node name="CarCollision" type="CollisionShape2D" parent="CarCollider"]
+position = Vector2(1, -48.5)
+shape = SubResource("RectangleShape2D_2h14n")
+
+[node name="CarHitbox" type="Area2D" parent="."]
+
+[node name="CarCollision" type="CollisionShape2D" parent="CarHitbox"]
 position = Vector2(1, -48.5)
 shape = SubResource("RectangleShape2D_2h14n")
 
@@ -80,12 +80,26 @@ shape = SubResource("RectangleShape2D_2h14n")
 script = ExtResource("7_h7vgg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySquash"]
-position = Vector2(1, -150)
+position = Vector2(1, -147.5)
 shape = SubResource("RectangleShape2D_f53hj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="EnemySquash"]
-position = Vector2(1, 53)
+position = Vector2(1, 50)
 shape = SubResource("RectangleShape2D_f53hj")
 
-[connection signal="body_entered" from="CarCollider" to="CarCollider" method="_on_body_entered"]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = -762.0
+offset_top = -694.0
+offset_right = 759.0
+offset_bottom = -633.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_p6e46")
+value = 100.0
+show_percentage = false
+
+[connection signal="area_entered" from="CarHitbox" to="." method="_on_car_hitbox_area_entered"]
 [connection signal="body_entered" from="EnemySquash" to="EnemySquash" method="_on_body_entered"]

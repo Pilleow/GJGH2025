@@ -12,6 +12,7 @@ var turret_rotation_max_speed: float = 0.1
 @onready var bullet: PackedScene = load(bulletPath)
 var shooting_cooldown = 0.5
 var shooting_cooldown_default = 0.2
+var bullet_damage = 2.0
 
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var turretChair: Node2D = get_parent().get_node("TurretChair")
@@ -99,10 +100,9 @@ func _shoot_bullet(speed: float):
 		turretSprite.position.y + dy
 	)
 	b.global_position = turretSprite.global_position + Vector2(dx, dy) * 80.0
+	b.set_damage(bullet_damage)
 	b.set_speed(speed)
 	b.set_target_vector(tv)
-	print(turret_rotation)
-	
 	get_tree().current_scene.add_child(b)
 
 func _physics_process(delta):

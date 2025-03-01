@@ -26,6 +26,8 @@ window/stretch/mode="viewport"
 
 Enemies="all existing enemies"
 Objects="all existing objects"
+HurtingEntities="all entities that have .damage and hurt the player"
+PlayerDamageEntities="anything that damages enemies"
 
 [input]
 
