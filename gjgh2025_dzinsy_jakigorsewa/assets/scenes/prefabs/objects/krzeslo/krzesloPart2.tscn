@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci5jku1xpoh61"]
+
+[ext_resource type="Script" path="res://assets/scenes/prefabs/box.gd" id="1_kxhdn"]
+[ext_resource type="Texture2D" uid="uid://bhmrsg50ghyx3" path="res://assets/sprites/objects/krzeslo/krzeslo-export2.png" id="2_ng1v4"]
+
+[node name="Krzeslo" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_kxhdn")
+part1Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart1.tscn"
+part2Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart2.tscn"
+part3Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart3.tscn"
+threshold_damage = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ng1v4")
+offset = Vector2(0, -56.985)

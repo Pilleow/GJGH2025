@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://kvotmysyd2b6"]
+
+[ext_resource type="Texture2D" uid="uid://ss66wwwotvvn" path="res://assets/sprites/objects/boost3.png" id="1_7mswv"]
+[ext_resource type="Script" path="res://assets/scenes/boosts/boost.gd" id="1_wth2b"]
+[ext_resource type="Texture2D" uid="uid://1s5hnsl44lq6" path="res://assets/sprites/objects/boost4.png" id="2_my0v8"]
+
+[node name="Boost" type="Node2D"]
+z_index = 1050
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_wth2b")
+
+[node name="SpeedBoostSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_7mswv")
+
+[node name="AttackBoostSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_my0v8")

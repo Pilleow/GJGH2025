@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvh8icvs3l2hg"]
+
+[ext_resource type="Script" path="res://assets/scenes/prefabs/box.gd" id="1_vhmn1"]
+[ext_resource type="Texture2D" uid="uid://cienjtunvn7lt" path="res://assets/sprites/objects/lawka_drewno/lawka_czesc-export.png" id="2_8ayoj"]
+
+[node name="LawkaDrewno" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_vhmn1")
+part1Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart1.tscn"
+part2Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart2.tscn"
+part3Path = "res://assets/scenes/prefabs/objects/skrzynka/boxPart3.tscn"
+threshold_damage = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_8ayoj")
+offset = Vector2(6.535, 3.57)
