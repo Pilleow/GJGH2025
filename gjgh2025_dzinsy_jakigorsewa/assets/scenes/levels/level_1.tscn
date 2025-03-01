@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dr0ww0mu7dxli"]
+[gd_scene load_steps=5 format=4 uid="uid://dr0ww0mu7dxli"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="3_qlpo8"]
+[ext_resource type="PackedScene" uid="uid://pjkpvqmwg8g2" path="res://assets/scenes/prefabs/objects/box.tscn" id="4_ehq2x"]
 
 [node name="Level1" type="Node2D"]
 
@@ -14,4 +15,24 @@ tile_map_data = PackedByteArray("AAAGAAUAAgABAAEAAAAGAAQAAgABAAEAAAAGAAMAAgABAAE
 tile_set = ExtResource("2_u7lgk")
 
 [node name="Enemy1" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(5, -731)
+position = Vector2(-1060, 78)
+
+[node name="Box" parent="." instance=ExtResource("4_ehq2x")]
+position = Vector2(-497, -691)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Box2" parent="." instance=ExtResource("4_ehq2x")]
+position = Vector2(-569, -274)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Box3" parent="." instance=ExtResource("4_ehq2x")]
+position = Vector2(-137, -589)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Box4" parent="." instance=ExtResource("4_ehq2x")]
+position = Vector2(-847, -904)
+collision_layer = 5
+collision_mask = 5

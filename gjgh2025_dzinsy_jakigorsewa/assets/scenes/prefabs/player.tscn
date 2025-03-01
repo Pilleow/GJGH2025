@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=12 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
@@ -6,13 +6,26 @@
 [ext_resource type="Texture2D" uid="uid://bh65woeiuflsk" path="res://assets/sprites/character/dzialko.png" id="3_coyh4"]
 [ext_resource type="Texture2D" uid="uid://b5loktdwhky8h" path="res://assets/sprites/character/background.png" id="5_47gpw"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_infinite_background.gd" id="6_r3aec"]
-[ext_resource type="Script" path="res://assets/scenes/prefabs/player_enemy_squash.gd" id="7_h7vgg"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/player_squash.gd" id="7_h7vgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(64, 189)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_blaov"]
+
+[sub_resource type="GDScript" id="GDScript_f6yg6"]
+script/source = "extends RigidBody2D
+
+
+func _physics_process(delta):
+	for body in get_colliding_bodies():
+		if body is RigidBody2D:
+			var force_direction = get_parent().velocity
+			body.apply_force(force_direction * 500)
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f53hj"]
-size = Vector2(64, 14)
+size = Vector2(48, 14)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -51,9 +64,15 @@ position_smoothing_speed = 8.0
 [node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
 z_index = 3761
 
-[node name="EnemyCollider" type="StaticBody2D" parent="."]
+[node name="CarCollider" type="RigidBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+mass = 10000.0
+physics_material_override = SubResource("PhysicsMaterial_blaov")
+gravity_scale = 0.0
+script = SubResource("GDScript_f6yg6")
 
-[node name="CarCollision" type="CollisionShape2D" parent="EnemyCollider"]
+[node name="CarCollision" type="CollisionShape2D" parent="CarCollider"]
 position = Vector2(1, -48.5)
 shape = SubResource("RectangleShape2D_2h14n")
 
@@ -64,4 +83,9 @@ script = ExtResource("7_h7vgg")
 position = Vector2(1, -150)
 shape = SubResource("RectangleShape2D_f53hj")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EnemySquash"]
+position = Vector2(1, 53)
+shape = SubResource("RectangleShape2D_f53hj")
+
+[connection signal="body_entered" from="CarCollider" to="CarCollider" method="_on_body_entered"]
 [connection signal="body_entered" from="EnemySquash" to="EnemySquash" method="_on_body_entered"]
