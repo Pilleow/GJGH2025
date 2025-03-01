@@ -25,7 +25,7 @@ size = Vector2(63.0148, 43.5118)
 size = Vector2(85.769, 84.7712)
 
 [node name="PlayerInsideContainer" type="Node2D"]
-visible = false
+z_index = 75
 scale = Vector2(2.666, 2.666)
 script = ExtResource("1_duc1h")
 
@@ -60,7 +60,7 @@ position = Vector2(-133.158, -1.15866)
 shape = SubResource("RectangleShape2D_67w1b")
 
 [node name="PlayerInside" type="CharacterBody2D" parent="."]
-z_index = 290
+z_index = 1030
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_t53x0")
@@ -111,6 +111,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_1je1p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretChair"]
+z_index = 45
 position = Vector2(-301.951, 133.908)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("3_j8oju")
@@ -132,7 +133,6 @@ position = Vector2(-297.948, -229.182)
 shape = SubResource("RectangleShape2D_ij582")
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = 75
 position = Vector2(-300, 0.375)
 scale = Vector2(0.853213, 0.853213)
 texture = ExtResource("2_1xe42")

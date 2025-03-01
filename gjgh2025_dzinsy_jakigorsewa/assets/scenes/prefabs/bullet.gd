@@ -27,3 +27,7 @@ func _process(delta):
 	if lifetime <= 0:
 		call_deferred("queue_free")
 	global_position += target_vector * speed
+
+func _on_area_2d_body_entered(body):
+	if body is TileMapLayer:
+		queue_free()

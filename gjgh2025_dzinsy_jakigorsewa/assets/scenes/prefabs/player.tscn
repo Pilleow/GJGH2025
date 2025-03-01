@@ -35,7 +35,7 @@ zoom = Vector2(0.75, 0.75)
 position_smoothing_speed = 8.0
 
 [node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
-z_index = 3761
+z_index = 2196
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

@@ -1,7 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://d11a0kipsb72m"]
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://d11a0kipsb72m"]
 
 [ext_resource type="Texture2D" uid="uid://c44oq0tgwmvnj" path="res://assets/sprites/enemies/wrog1d.png" id="1_otwxs"]
 [ext_resource type="Texture2D" uid="uid://ebu84yxi87pf" path="res://assets/sprites/enemies/wrog1.png" id="2_jumnp"]
+[ext_resource type="Texture2D" uid="uid://b0t26nmhyhixq" path="res://assets/sprites/enemies/wrog1_attack2.png" id="3_xxmsk"]
+[ext_resource type="Texture2D" uid="uid://cr6q0ejn0nnqm" path="res://assets/sprites/enemies/wrog1_attack.png" id="4_vghmu"]
 
 [resource]
 animations = [{
@@ -19,5 +21,16 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xxmsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vghmu")
+}],
+"loop": false,
+"name": &"shooting",
 "speed": 5.0
 }]

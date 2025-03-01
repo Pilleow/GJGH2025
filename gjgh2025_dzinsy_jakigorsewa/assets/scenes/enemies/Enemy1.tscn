@@ -24,7 +24,7 @@ shape = SubResource("CircleShape2D_u3du0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy1"]
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("1_wp0r1")
-animation = &"idle"
+animation = &"dead"
 
 [node name="Hitbox" type="Area2D" parent="Enemy1" groups=["PlayerDamageEntities"]]
 

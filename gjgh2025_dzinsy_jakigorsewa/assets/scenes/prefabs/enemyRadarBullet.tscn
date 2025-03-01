@@ -23,3 +23,5 @@ position = Vector2(0.115118, 0.196972)
 scale = Vector2(0.379, 0.379)
 texture = ExtResource("2_12xi0")
 offset = Vector2(-2.225, -3.11)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

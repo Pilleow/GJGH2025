@@ -121,7 +121,6 @@ func _update_camera_ahead_of_car(delta):
 func _MotorSound():
 	motor_pitch = (abs(car_speed))/car_max_speed * motor_max_pitch
 	motor_pitch_scaled = (int(abs(car_speed) / 8)) % 60 + 60
-	print(motor_pitch_scaled)
 	motor_pitch = 2.5 * motor_pitch_scaled / 100;
 	
 	#if(motor_pitch >=  motor_max_pitch ):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://dr0ww0mu7dxli"]
+[gd_scene load_steps=5 format=4 uid="uid://dr0ww0mu7dxli"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
+[ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="3_qlpo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72rgs"]
 size = Vector2(343, 275)
@@ -9,7 +10,7 @@ size = Vector2(343, 275)
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_nc23y")]
-z_index = 3096
+z_index = 1806
 position = Vector2(0, 389)
 
 [node name="Map" type="TileMapLayer" parent="."]
@@ -21,3 +22,6 @@ tile_set = ExtResource("2_u7lgk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextLevelTrigger"]
 position = Vector2(-413.5, -3065.5)
 shape = SubResource("RectangleShape2D_72rgs")
+
+[node name="Node2D" parent="." instance=ExtResource("3_qlpo8")]
+position = Vector2(176, -826)
