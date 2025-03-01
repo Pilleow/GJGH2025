@@ -9,6 +9,8 @@ var turret_rotation_max_speed: float = 0.1
 var able_to_sit_down: bool = false
 var sat_down: bool = false
 
+var able_to_pickup_boost_location: int = 0
+
 var able_to_put_boost_in_engine: bool = false
 var current_holding_boost = ""
 var current_active_boosts = [
@@ -128,6 +130,9 @@ func _update_interact_label():
 			interactLabel.text = "Potrzebujesz ulepszenia!"
 		else:
 			interactLabel.text = "[X] DOŁADUJ AUTO!!!"
+	elif able_to_pickup_boost_location:
+		if not current_holding_boost:
+			interactLabel.text = "[X] Podnieś doładowanie"
 
 func _shoot_bullet(speed: float):
 	var b = bullet.instantiate()
@@ -171,3 +176,35 @@ func _on_engine_area_2d_body_entered(body):
 func _on_engine_area_2d_body_exited(body):
 	if body.name == "PlayerInside":
 		able_to_put_boost_in_engine = false
+
+func _on_boost1_in_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 1
+
+func _on_boost1_in_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 0
+
+func _on_boost2_in_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 2
+
+func _on_boost2_in_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 0
+
+func _on_boost3_in_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 3
+
+func _on_boost3_in_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 0
+
+func _on_boost4_in_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 4
+
+func _on_boost4_in_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_pickup_boost_location = 0
