@@ -62,25 +62,18 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_coyh4")
 offset = Vector2(0, -60)
 
-[node name="CarCollider" type="RigidBody2D" parent="."]
-z_index = -485
-collision_layer = 5
-collision_mask = 5
-mass = 10000.0
-gravity_scale = 0.0
-
-[node name="CarCollision" type="CollisionShape2D" parent="CarCollider"]
-position = Vector2(1, -48.5)
-shape = SubResource("RectangleShape2D_2h14n")
-
 [node name="CarHitbox" type="Area2D" parent="."]
 z_index = -140
+collision_layer = 5
+collision_mask = 5
 
 [node name="CarCollision" type="CollisionShape2D" parent="CarHitbox"]
 position = Vector2(1, -48.5)
 shape = SubResource("RectangleShape2D_2h14n")
 
 [node name="EnemySquash" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("7_h7vgg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySquash"]
