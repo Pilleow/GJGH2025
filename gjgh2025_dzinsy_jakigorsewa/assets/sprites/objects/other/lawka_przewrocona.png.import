@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hdasmra0ap15"
-path="res://.godot/imported/skrzynia_cz4.png-8261cbf5f51121b4dd445b4b2208ff2c.ctex"
+uid="uid://chb7dkn58avaw"
+path="res://.godot/imported/lawka_przewrocona.png-3721aa90d5a1a51326816421c2716a66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/objects/box/skrzynia_cz4.png"
-dest_files=["res://.godot/imported/skrzynia_cz4.png-8261cbf5f51121b4dd445b4b2208ff2c.ctex"]
+source_file="res://assets/sprites/objects/other/lawka_przewrocona.png"
+dest_files=["res://.godot/imported/lawka_przewrocona.png-3721aa90d5a1a51326816421c2716a66.ctex"]
 
 [params]
 

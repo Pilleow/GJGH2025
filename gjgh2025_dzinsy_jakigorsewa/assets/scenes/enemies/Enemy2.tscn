@@ -18,11 +18,12 @@ bullet_path = "res://assets/scenes/prefabs/enemyBallBullet2.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
 z_index = 85
 position = Vector2(0, -6)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_u3du0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy2"]
-scale = Vector2(0.4, 0.4)
+z_index = 445
+scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_fgf8h")
 animation = &"idle"
 
@@ -31,7 +32,7 @@ animation = &"idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2/Hitbox"]
 z_index = 85
 position = Vector2(0, -6)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_u3du0")
 
 [connection signal="area_entered" from="Enemy2/Hitbox" to="Enemy2" method="_on_hitbox_area_entered"]

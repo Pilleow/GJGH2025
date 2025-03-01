@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://don06lxdxnlyt"
-path="res://.godot/imported/skrzynia.png-40cfdf9dc27237851a6d90a9fdcc220a.ctex"
+uid="uid://cf7whv1ggukeu"
+path="res://.godot/imported/skrzynia_cz3.png-24ea3fcd3c55ec64d3bd81b582ee7b86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/objects/box/skrzynia.png"
-dest_files=["res://.godot/imported/skrzynia.png-40cfdf9dc27237851a6d90a9fdcc220a.ctex"]
+source_file="res://assets/sprites/objects/skrzynia/skrzynia_cz3.png"
+dest_files=["res://.godot/imported/skrzynia_cz3.png-24ea3fcd3c55ec64d3bd81b582ee7b86.ctex"]
 
 [params]
 

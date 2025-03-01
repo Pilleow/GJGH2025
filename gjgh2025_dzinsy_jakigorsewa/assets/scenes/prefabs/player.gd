@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var boost_car_speed_multiplier: float = 1.0
+
 var car_angle = 0.0
 var car_accel = 0.0
 var car_max_accel = 5.0
@@ -7,7 +9,7 @@ var car_speed = 0.0
 var car_max_speed = 400.0
 var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
-var car_ground_friction = 0.01
+var car_ground_friction = 0.02
 
 var max_hp: float = 1000.0
 var hp: float = max_hp
@@ -27,6 +29,7 @@ var player_speed_interval = player_speed_interval_default
 
 @onready var carSquashFront: Area2D = $EnemySquash
 @onready var carCollider: CollisionShape2D = $CarCollision
+@onready var pl2df: PointLight2D = $PointLight2DFront
 @onready var carSprite: Sprite2D = $CarSprite
 @onready var carHitbox: Area2D = $CarHitbox
 @onready var camera: Camera2D = $Camera2D
@@ -75,7 +78,7 @@ func _move(timedelta: float):
 			#car_accel *= -0.5
 	
 	move_and_slide()
-
+	
 func _take_input():
 	var acceleration = Input.get_axis("up", "down") * car_max_accel
 	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
@@ -85,7 +88,7 @@ func _take_input():
 	_steer_set(rotation)
 
 func _update_camera_ahead_of_car(delta):
-	var mult = 0.08
+	var mult = 0.03
 	var mod = -velocity * abs(car_speed) / car_max_speed * mult
 	var target_zoom = Vector2(1,1) * 0.75 - Vector2(
 		abs(car_speed) / car_max_speed * mult, 
@@ -94,7 +97,7 @@ func _update_camera_ahead_of_car(delta):
 	camera.zoom = target_zoom
 	camera.global_position = global_position - Vector2(478.8, 0) - mod
 
-	if car_accel == 0:
+	if sign(car_accel) != sign(car_speed):
 		car_speed *= 1 - car_ground_friction
 	car_angle += steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
@@ -123,6 +126,7 @@ func _physics_process(delta):
 	carSprite.rotation = -car_angle
 	carSquashFront.rotation = -car_angle
 	carHitbox.rotation = -car_angle
+	pl2df.rotation = -car_angle
 	carCollider.position = carSprite.position + Vector2(sin(car_angle), cos(car_angle)) * (-48.5)
 	_MotorSound()
 	_take_input()

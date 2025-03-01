@@ -25,8 +25,8 @@ func _on_body_entered(body):
 		return
 	var gr = g[0]
 	if gr in ["Enemies", "Objects"]:
-		#if gr == "Enemies" and body.is_dead:
-			#return
+		if gr == "Enemies":
+			body.player_visible = true
 		body.hit_and_knockback(
 			round(abs(player.car_speed / player.car_max_speed * squash_damage_max)), 
 			abs(player.car_speed / player.car_max_speed * squash_knockback_max)

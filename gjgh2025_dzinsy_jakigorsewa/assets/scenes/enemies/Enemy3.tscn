@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://yqigtx813sr0"]
+
+[ext_resource type="Script" path="res://assets/scenes/enemies/enemy_3.gd" id="1_sa48o"]
+[ext_resource type="SpriteFrames" uid="uid://bk7maa0x1tcnp" path="res://assets/animations/enemy3.tres" id="2_ymsjn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u3du0"]
+radius = 46.1736
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RotateAroundPoint" type="Marker2D" parent="."]
+
+[node name="Enemy3" type="CharacterBody2D" parent="."]
+collision_mask = 5
+script = ExtResource("1_sa48o")
+bullet_path = "res://assets/scenes/prefabs/enemyLargeBullet3.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+z_index = 85
+position = Vector2(0, -6)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_u3du0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy3"]
+z_index = 340
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("2_ymsjn")
+animation = &"dead"
+
+[node name="Hitbox" type="Area2D" parent="Enemy3" groups=["PlayerDamageEntities"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3/Hitbox"]
+z_index = 85
+position = Vector2(0, -6)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_u3du0")
+
+[connection signal="area_entered" from="Enemy3/Hitbox" to="Enemy3" method="_on_hitbox_area_entered"]

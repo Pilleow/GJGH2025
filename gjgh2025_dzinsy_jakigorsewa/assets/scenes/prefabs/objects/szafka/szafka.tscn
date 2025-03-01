@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://selpyftufxsg"]
+
+[ext_resource type="Texture2D" uid="uid://blvg2rqhl46j4" path="res://assets/sprites/objects/szafka/szafka.png" id="1_jmmmn"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/box.gd" id="1_wny8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gwl"]
+size = Vector2(58, 52)
+
+[node name="Szafka" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_wny8r")
+part1Path = "res://assets/scenes/prefabs/objects/szafka/szafkaPart1.tscn"
+part2Path = "res://assets/scenes/prefabs/objects/szafka/szafkaPart2.tscn"
+part3Path = "res://assets/scenes/prefabs/objects/szafka/szafkaPart3.tscn"
+part4Path = "res://assets/scenes/prefabs/objects/szafka/szafkaPart4.tscn"
+part5Path = "res://assets/scenes/prefabs/objects/szafka/szafkaPart5.tscn"
+partSpecialPath = "res://assets/scenes/prefabs/objects/szafka/szafkaPartSpecial.tscn"
+threshold_damage = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_jmmmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b2gwl")
