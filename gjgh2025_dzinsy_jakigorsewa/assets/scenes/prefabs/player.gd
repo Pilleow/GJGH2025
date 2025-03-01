@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 var car_angle = 0.0
-
 var car_accel = 0.0
 var car_max_accel = 20.0
 var car_speed = 0.0
@@ -58,10 +57,50 @@ func _brake(force: float):
 		car_speed = 0
 
 func _move(timedelta: float):
-	
 	car_speed += car_accel
 	if abs(car_speed) > car_max_speed:
 		car_speed = car_max_speed * sign(car_speed)
+	if car_accel == 0:
+		car_speed *= 1 - car_ground_friction
+	car_angle += steering_angle * car_speed / car_max_speed
+	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
+	
+	var lslidecol = get_last_slide_collision()
+	if lslidecol != null:
+		if lslidecol.get_collider() is TileMapLayer:
+			velocity *= -2
+			car_speed *= -0.5
+			car_accel *= -0.5
+	
+	move_and_slide()
+
+func _take_input():
+	var acceleration = Input.get_axis("up", "down") * car_max_accel
+	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
+		acceleration *= 1 - ((abs(car_speed)) / car_max_speed - 0.5)
+	_accel_set(acceleration)
+	var rotation = Input.get_axis("left", "right")
+	_steer_set(rotation)
+
+func _update_camera_ahead_of_car(delta):
+	pass
+	#player_speed_interval -= delta
+	#if player_speed_interval < 0:
+		#player_speed_interval = player_speed_interval_default
+		#player_past_speeds.append(car_speed)
+		#if len(player_past_speeds) > 100:
+			#player_past_speeds.remove_at(0)
+	#
+	#var avg_speed = 0.0
+	#for s in player_past_speeds:
+		#avg_speed += s
+	#avg_speed /= len(player_past_speeds)
+	#var mod = -velocity * abs(avg_speed) / car_max_speed * 0.2
+	#var target_zoom = Vector2(1,1) * 0.75 - Vector2(
+		#abs(avg_speed) / car_max_speed * 0.2, 
+		#abs(avg_speed) / car_max_speed * 0.2
+	#)
+	#camera.global_position = global_position - Vector2(478.8, 0) - mod
 
 	if car_accel == 0:
 		car_speed *= 1 - car_ground_friction
