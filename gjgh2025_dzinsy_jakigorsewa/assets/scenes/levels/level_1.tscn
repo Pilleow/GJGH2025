@@ -30,9 +30,6 @@ tile_set = ExtResource("2_u7lgk")
 position = Vector2(-413.5, -3065.5)
 shape = SubResource("RectangleShape2D_72rgs")
 
-[node name="Node2D6" parent="." instance=ExtResource("3_qlpo8")]
-position = Vector2(-99, -1341)
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -185
 position = Vector2(-152, -1848)
@@ -43,107 +40,120 @@ z_index = -185
 position = Vector2(-33, 976)
 texture = ExtResource("5_j1ga3")
 
-[node name="Node2D" parent="." instance=ExtResource("5_j6xy4")]
-position = Vector2(142, -1334)
+[node name="ObjectContainer" type="Node2D" parent="."]
 
-[node name="Krzeslo" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(1.00001, -826)
 rotation = 2.98658
 
-[node name="Krzeslo4" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo4" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-305, -538)
 rotation = -0.000720069
 
-[node name="Krzeslo5" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo5" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-394, -538)
 rotation = -0.000720069
 
-[node name="Krzeslo6" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo6" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-480, -538)
 rotation = -0.000720069
 
-[node name="Krzeslo7" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo7" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-570, -538)
 rotation = -0.000720069
 
-[node name="Krzeslo8" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo8" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-661, -538)
 rotation = -0.000720069
 
-[node name="Krzeslo9" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo9" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(681, -542)
 rotation = -0.000720069
 
-[node name="Krzeslo10" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo10" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(592, -542)
 rotation = -0.000720069
 
-[node name="Krzeslo11" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo11" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(506, -542)
 rotation = -0.000720069
 
-[node name="Krzeslo12" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo12" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(416, -542)
 rotation = -0.000720069
 
-[node name="Krzeslo13" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo13" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(325, -542)
 rotation = -0.000720069
 
-[node name="Krzeslo2" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo2" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-169, -865)
-rotation = 4.56687
+rotation = -1.71632
+scale = Vector2(1, 1)
 
-[node name="Krzeslo3" parent="." instance=ExtResource("6_8i5ql")]
+[node name="Krzeslo3" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(160, -860)
 rotation = 2.26166
 
-[node name="Box" parent="." instance=ExtResource("6_may06")]
+[node name="Box" parent="ObjectContainer" instance=ExtResource("6_may06")]
 position = Vector2(342, -1565)
 
-[node name="Box2" parent="." instance=ExtResource("6_may06")]
+[node name="Box2" parent="ObjectContainer" instance=ExtResource("6_may06")]
 position = Vector2(174, -1565)
 
-[node name="Box3" parent="." instance=ExtResource("6_may06")]
+[node name="Box3" parent="ObjectContainer" instance=ExtResource("6_may06")]
 position = Vector2(-666, -1565)
 
-[node name="Box4" parent="." instance=ExtResource("6_may06")]
+[node name="Box4" parent="ObjectContainer" instance=ExtResource("6_may06")]
 position = Vector2(-496, -1565)
 
-[node name="Szafka" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(-391, -980)
 
-[node name="Szafka2" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka2" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(-297, -980)
 
-[node name="Szafka3" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka3" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(-202, -980)
 
-[node name="Szafka4" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka4" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(-106, -980)
 
-[node name="Szafka5" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka5" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(-12, -980)
 
-[node name="Szafka6" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka6" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(89, -980)
 
-[node name="Szafka7" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka7" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(185, -980)
 
-[node name="Szafka8" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka8" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(282, -980)
 
-[node name="Szafka9" parent="." instance=ExtResource("7_v8yeo")]
+[node name="Szafka9" parent="ObjectContainer" instance=ExtResource("7_v8yeo")]
 position = Vector2(381, -980)
 
-[node name="LawkaDrewno" parent="." instance=ExtResource("9_fa4xu")]
+[node name="LawkaDrewno" parent="ObjectContainer" instance=ExtResource("9_fa4xu")]
 position = Vector2(1, -753)
 
-[node name="LawkaDrewno2" parent="." instance=ExtResource("9_fa4xu")]
+[node name="LawkaDrewno2" parent="ObjectContainer" instance=ExtResource("9_fa4xu")]
 position = Vector2(-225, -820)
 rotation = 0.951753
+scale = Vector2(1, 1)
 
-[node name="LawkaDrewno3" parent="." instance=ExtResource("9_fa4xu")]
+[node name="LawkaDrewno3" parent="ObjectContainer" instance=ExtResource("9_fa4xu")]
 position = Vector2(223, -822)
 rotation = -1.0841
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="Node2D6" parent="EnemyContainer" instance=ExtResource("3_qlpo8")]
+position = Vector2(-99, -1341)
+
+[node name="Node2D" parent="EnemyContainer" instance=ExtResource("5_j6xy4")]
+position = Vector2(142, -1334)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.39, 0.39, 0.39, 1)

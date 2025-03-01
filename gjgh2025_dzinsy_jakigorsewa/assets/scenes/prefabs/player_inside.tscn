@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://diu4q6now4xlo"]
+[gd_scene load_steps=14 format=3 uid="uid://diu4q6now4xlo"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside_container.gd" id="1_duc1h"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="1_t53x0"]
 [ext_resource type="Texture2D" uid="uid://c83um0ysvt7g0" path="res://assets/sprites/other/tlo.png" id="2_1xe42"]
 [ext_resource type="SpriteFrames" uid="uid://b2qkags0xceuf" path="res://assets/animations/personAS.tres" id="2_bhpyp"]
 [ext_resource type="SpriteFrames" uid="uid://102nro1wij3w" path="res://assets/animations/krzeslo.tres" id="3_j8oju"]
+[ext_resource type="Texture2D" uid="uid://5pwubqk1uqkx" path="res://assets/sprites/objects/dowrzucaniaboostow.png" id="5_1noh3"]
+[ext_resource type="Texture2D" uid="uid://uc03s8dyo44a" path="res://assets/sprites/objects/dowyrzucaniaboostow.png" id="7_c4iax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
 size = Vector2(41, 471.185)
@@ -22,7 +24,7 @@ size = Vector2(59.2639, 65.6418)
 size = Vector2(63.0148, 43.5118)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij582"]
-size = Vector2(85.769, 84.7712)
+size = Vector2(106.774, 84.7712)
 
 [node name="PlayerInsideContainer" type="Node2D"]
 z_index = 75
@@ -75,9 +77,13 @@ shape = SubResource("CircleShape2D_rtmai")
 z_index = 2785
 texture_filter = 3
 offset_left = -385.971
-offset_top = -48.3871
+offset_top = -67.1418
 offset_right = -209.971
-offset_bottom = -25.3871
+offset_bottom = -44.1418
+theme_override_colors/font_color = Color(1, 0.694748, 0.678092, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 0
 text = "[X] Text Here"
 horizontal_alignment = 1
 
@@ -92,7 +98,7 @@ sprite_frames = ExtResource("2_bhpyp")
 animation = &"idle"
 
 [node name="TurretChair" type="Node2D" parent="."]
-z_index = 210
+z_index = -25
 
 [node name="SitDownArea2D" type="Area2D" parent="TurretChair"]
 collision_layer = 2
@@ -112,6 +118,7 @@ shape = SubResource("RectangleShape2D_1je1p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretChair"]
 z_index = 45
+texture_filter = 1
 position = Vector2(-301.951, 133.908)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("3_j8oju")
@@ -119,23 +126,47 @@ animation = &"sitting"
 
 [node name="Engine" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Engine"]
-offset_left = -341.0
-offset_top = -270.0
-offset_right = -255.0
-offset_bottom = -213.0
-color = Color(1, 0.23, 0.23, 1)
-
 [node name="EngineArea2D" type="Area2D" parent="Engine"]
+z_index = 1950
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Engine/EngineArea2D"]
-position = Vector2(-297.948, -229.182)
+position = Vector2(-297.948, -196.174)
 shape = SubResource("RectangleShape2D_ij582")
 
+[node name="Sprite2D" type="Sprite2D" parent="Engine"]
+z_index = 85
+position = Vector2(-297.824, -205.551)
+scale = Vector2(0.75288, 0.75288)
+texture = ExtResource("5_1noh3")
+
 [node name="Background" type="Sprite2D" parent="."]
+texture_filter = 3
 position = Vector2(-300, 0.375)
 scale = Vector2(0.853213, 0.853213)
 texture = ExtResource("2_1xe42")
 
+[node name="BoostInContainer" type="Node2D" parent="."]
+
+[node name="BoostIn1" type="Node2D" parent="BoostInContainer"]
+
+[node name="BoostInArea2D" type="Area2D" parent="BoostInContainer/BoostIn1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoostInContainer/BoostIn1/BoostInArea2D"]
+position = Vector2(-162.416, -155.664)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_ij582")
+
+[node name="Sprite2D" type="Sprite2D" parent="BoostInContainer/BoostIn1/BoostInArea2D"]
+z_index = 85
+texture_filter = 3
+position = Vector2(-163.166, -156.414)
+rotation = 1.57079
+scale = Vector2(0.75288, 0.75288)
+texture = ExtResource("7_c4iax")
+
 [connection signal="body_entered" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_entered"]
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]
+[connection signal="body_entered" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_entered"]
+[connection signal="body_exited" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_exited"]

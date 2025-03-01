@@ -2,11 +2,14 @@ extends CharacterBody2D
 
 const SPEED = 650.0
 
-var sat_down: bool = false  # this should be false on prod
-var able_to_sit_down: bool = false
-
 var turret_rotation: float = 0.0
 var turret_rotation_max_speed: float = 0.1
+
+var able_to_sit_down: bool = false
+var sat_down: bool = false
+
+var able_to_put_boost_in_engine: bool = false
+var current_equipped_boost = ""
 
 @export_file("*.tscn") var bulletPath = ""
 @onready var bullet: PackedScene = load(bulletPath)
@@ -45,12 +48,12 @@ func _move_turret():
 func _move_person():
 	var y_direction = Input.get_axis("designer_up", "designer_down")
 	if y_direction:
-		velocity.y = move_toward(velocity.y, y_direction * SPEED, SPEED/2)
+		velocity.y = move_toward(velocity.y, y_direction * SPEED, SPEED/3)
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED/2)
 	var x_direction = Input.get_axis("designer_left", "designer_right")
 	if x_direction:
-		velocity.x = move_toward(velocity.x, x_direction * SPEED, SPEED/2)
+		velocity.x = move_toward(velocity.x, x_direction * SPEED, SPEED/3)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED/2)
 	if abs(x_direction) > 0.01 or abs(y_direction) > 0.01:
@@ -89,7 +92,12 @@ func _interact_with_environent():
 func _update_interact_label():
 	interactLabel.text = ""
 	if able_to_sit_down:
-		interactLabel.text = "[X] Sit down"
+		interactLabel.text = "[X] Steruj działkiem"
+	elif able_to_put_boost_in_engine:
+		if current_equipped_boost == "":
+			interactLabel.text = "Potrzebujesz ulepszenia!"
+		else:
+			interactLabel.text = "[X] DOŁADUJ AUTO!!!"
 
 func _shoot_bullet(speed: float):
 	var b = bullet.instantiate()
@@ -124,3 +132,11 @@ func _on_sit_down_area_2d_body_entered(body):
 func _on_sit_down_area_2d_body_exited(body):
 	if body.name == "PlayerInside":
 		able_to_sit_down = false
+
+func _on_engine_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_put_boost_in_engine = true
+
+func _on_engine_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_put_boost_in_engine = false
