@@ -34,8 +34,8 @@ var playingShootAnimation: bool = false
 var stateTimeLeft: float = -1.0
 var currentState = "walk"
 var stateMachine = {
-	"walk": 2.5,
-	"shoot": 1.5
+	"walk": 1.0,
+	"shoot": 1.0
 }
 func _check_and_change_state(delta: float):
 	if not player_visible:
@@ -103,7 +103,8 @@ func take_damage(damage: float):
 
 func _move(disable_voluntary_movement: bool = false):
 	var move_to = Vector2.ZERO
-	if global_position.distance_to(carCollider.global_position) <= min_allowed_distance_to_player:
+	var shouldMove = global_position.distance_to(carCollider.global_position) > min_allowed_distance_to_player
+	if not shouldMove:
 		stateTimeLeft = -1
 	else:
 		move_to = (player.global_position - global_position).normalized()  * enemy_speed
@@ -114,6 +115,11 @@ func _move(disable_voluntary_movement: bool = false):
 	else:
 		enemy_move = Vector2.ZERO
 	velocity = enemy_move * enemy_speed + knockback_move
+	if not shouldMove:
+		velocity += Vector2(
+			sin(Time.get_ticks_msec() / 1000) * 120, 
+			cos(Time.get_ticks_msec() / 1000) * 120
+		)
 	if knockback_move:
 		knockback_move *= 0.9
 	if not playingShootAnimation and not is_dead:
@@ -129,7 +135,7 @@ func _check_player_visibility():
 		[self]
 	))
 	var c = result.get("collider")
-	player_visible = (c and c.name == "Player")
+	player_visible = c and c.name == "Player"
 
 func _physics_process(delta):
 	if is_dead:
