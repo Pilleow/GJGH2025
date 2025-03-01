@@ -12,12 +12,14 @@ var sat_down: bool = false
 var able_to_pickup_boost_location: int = 0
 
 var able_to_put_boost_in_engine: bool = false
-var current_holding_boost = ""
+var current_holding_boost = null
 var current_active_boosts = [
-	["car_boost", 2.0], 
-	["attack_speed", 1.5]
-]
+	["car_boost", 2.0, 2.0], 
+	["attack_speed", 1.5, 2.0]
+]  # [type, time left, total time]
 
+@export_file("*.tscn") var boostTimerBarPath = ""
+@onready var boostTimerBar = load(boostTimerBarPath)
 @export_file("*.tscn") var bulletPath = ""
 @onready var bullet: PackedScene = load(bulletPath)
 var shooting_cooldown = 0.5
@@ -32,6 +34,7 @@ var bullet_damage = 2.0
 @onready var animSpriteContainer: Node2D = $AnimatedSprite2DContainer
 @onready var turretChairSprite: Node2D = get_parent().get_node("TurretChair").get_node("AnimatedSprite2D")
 @onready var car: CharacterBody2D = null
+@onready var boostInContainer: Node2D = get_parent().get_node("BoostInContainer")
 
 func _ready():
 	turretSprite = get_tree().current_scene.find_child("CarTurretSprite")
@@ -55,7 +58,12 @@ func _move_turret():
 	#turretSprite.global_rotation = turret_rotation * turret_rotation_max_speed
 
 func add_boost_to_car(boost: String, time: float):
-	current_active_boosts.append([boost, time])
+	current_active_boosts.append([boost, time, time])
+	var pb = boostTimerBar.instantiate()
+	pb.position = Vector2(754.0 / 2.666, -672.0 / 2.666 + len(current_active_boosts) * 40.0)
+	pb.set_type(boost)
+	pb.set_time_left(time)
+	get_parent().add_child(pb)
 	_update_existing_boost_effects()
 
 func _update_existing_boost_effects():
@@ -117,20 +125,33 @@ func _toggle_sit_down():
 		turretChairSprite.play("empty")
 		show()
 
+func _put_boost_in_engine():
+	var time = {
+		"boost_car_speed_multiplier": 5.0,
+		"boost_turret_shooting_speed": 6.0
+	}[current_holding_boost.boost_type]
+	add_boost_to_car(current_holding_boost.boost_type, time)
+	current_holding_boost.call_deferred("queue_free")
+	current_holding_boost = null
+
 func _interact_with_environent():
 	if able_to_sit_down or sat_down:
 		_toggle_sit_down()
+	if able_to_put_boost_in_engine and current_holding_boost:
+		_put_boost_in_engine()
+	if boostInContainer.has_boost_in_location(able_to_pickup_boost_location):
+		boostInContainer.take_boost_from_location(able_to_pickup_boost_location)
 
 func _update_interact_label():
 	interactLabel.text = ""
 	if able_to_sit_down:
 		interactLabel.text = "[X] Steruj działkiem"
 	elif able_to_put_boost_in_engine:
-		if current_holding_boost == "":
+		if not current_holding_boost:
 			interactLabel.text = "Potrzebujesz ulepszenia!"
 		else:
 			interactLabel.text = "[X] DOŁADUJ AUTO!!!"
-	elif able_to_pickup_boost_location:
+	elif boostInContainer.has_boost_in_location(able_to_pickup_boost_location):
 		if not current_holding_boost:
 			interactLabel.text = "[X] Podnieś doładowanie"
 
@@ -159,7 +180,7 @@ func _physics_process(delta):
 	if sat_down:
 		if Input.is_action_pressed("designer_shoot_right") and shooting_cooldown < 0:
 			_shoot_bullet(20)
-			shooting_cooldown = shooting_cooldown_default
+			shooting_cooldown = shooting_cooldown_default / boost_turret_shooting_speed
 
 func _on_sit_down_area_2d_body_entered(body):
 	if body.name == "PlayerInside":
