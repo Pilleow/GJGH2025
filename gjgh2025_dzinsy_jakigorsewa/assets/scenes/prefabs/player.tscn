@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=10 format=3 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
@@ -6,21 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://bh65woeiuflsk" path="res://assets/sprites/character/dzialko.png" id="3_coyh4"]
 [ext_resource type="Texture2D" uid="uid://b5loktdwhky8h" path="res://assets/sprites/character/background.png" id="5_47gpw"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_infinite_background.gd" id="6_r3aec"]
+[ext_resource type="Script" path="res://assets/scenes/prefabs/player_enemy_squash.gd" id="7_h7vgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(64, 189)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_67w1b"]
-size = Vector2(41, 466)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjm1u"]
-size = Vector2(41, 305)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut070"]
-size = Vector2(40, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f53hj"]
+size = Vector2(64, 14)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_y71k4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -53,3 +50,18 @@ position_smoothing_speed = 8.0
 
 [node name="PlayerInsideContainer" parent="Camera2D" instance=ExtResource("3_5rf1g")]
 z_index = 3761
+
+[node name="EnemyCollider" type="StaticBody2D" parent="."]
+
+[node name="CarCollision" type="CollisionShape2D" parent="EnemyCollider"]
+position = Vector2(1, -48.5)
+shape = SubResource("RectangleShape2D_2h14n")
+
+[node name="EnemySquash" type="Area2D" parent="."]
+script = ExtResource("7_h7vgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySquash"]
+position = Vector2(1, -150)
+shape = SubResource("RectangleShape2D_f53hj")
+
+[connection signal="body_entered" from="EnemySquash" to="EnemySquash" method="_on_body_entered"]
