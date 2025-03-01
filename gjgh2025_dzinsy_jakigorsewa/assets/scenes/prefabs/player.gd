@@ -2,18 +2,16 @@ extends CharacterBody2D
 
 var boost_car_speed_multiplier: float = 1.0
 
-
-#Drifing variables skull emoji:
-var slip_speed = 300;
+## drifting -------------------------
+var push_force = 0.0
 var push_force_max = 10;
-var push_force = 0.0;
+var drift_brake_speed = 5.0;
 var push_velocity = Vector2.ZERO;
-var car_angle_push = 0.0
-var tire_force = 400;
 var drifting = false;
 
 var angle1 = 0.0
 var prev_angle1 = 0.0
+## drifting ^^^^-------------------------
 
 var car_angle = 0.0
 var car_accel = 0.0
@@ -86,7 +84,7 @@ func _move(timedelta: float):
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
 	
 	if(drifting and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))):
-		car_speed -= 10 *sign(car_speed)
+		car_speed -= drift_brake_speed *sign(car_speed)
 		#if(push_force < push_force_max):
 			#if(car_speed >= 0):
 				#push_force += 10;
