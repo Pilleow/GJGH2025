@@ -17,6 +17,7 @@ var player_past_speeds = [0.0]
 var player_speed_interval_default = 0.1
 var player_speed_interval = player_speed_interval_default
 
+@onready var carSquashFront: Area2D = $EnemySquash
 @onready var carCollider: CollisionShape2D = $CarCollision
 @onready var carSprite: Sprite2D = $CarSprite
 @onready var camera: Camera2D = $Camera2D
@@ -46,9 +47,10 @@ func _move(timedelta: float):
 	
 	var lslidecol = get_last_slide_collision()
 	if lslidecol != null:
-		velocity *= -2
-		car_speed *= -0.5
-		car_accel *= -0.5
+		if lslidecol.get_collider() is TileMapLayer:
+			velocity *= -2
+			car_speed *= -0.5
+			car_accel *= -0.5
 	
 	move_and_slide()
 
@@ -83,6 +85,7 @@ func _update_camera_ahead_of_car(delta):
 func _physics_process(delta):
 	carCollider.rotation = -car_angle
 	carSprite.rotation = -car_angle
+	carSquashFront.rotation = -car_angle
 	carCollider.position = carSprite.position + Vector2(sin(car_angle), cos(car_angle)) * (-48.5)
 	_take_input()
 	_move(delta)

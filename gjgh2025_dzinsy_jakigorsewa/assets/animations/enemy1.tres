@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://d11a0kipsb72m"]
+
+[ext_resource type="Texture2D" uid="uid://c44oq0tgwmvnj" path="res://assets/sprites/enemies/wrog1d.png" id="1_otwxs"]
+[ext_resource type="Texture2D" uid="uid://ebu84yxi87pf" path="res://assets/sprites/enemies/wrog1.png" id="2_jumnp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_otwxs")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jumnp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
