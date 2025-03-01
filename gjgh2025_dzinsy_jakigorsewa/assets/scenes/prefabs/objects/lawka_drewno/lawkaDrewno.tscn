@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://hpxwkoq7qpeu"]
+
+[ext_resource type="Script" path="res://assets/scenes/prefabs/box.gd" id="1_oupm0"]
+[ext_resource type="Texture2D" uid="uid://ckltie81ig74c" path="res://assets/sprites/objects/lawka_drewno/llawka_drewno.png" id="2_e7cr8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gwl"]
+size = Vector2(210, 74)
+
+[node name="LawkaDrewno" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_oupm0")
+part1Path = "res://assets/scenes/prefabs/objects/lawka_drewno/lawkaDrewnoPart1.tscn"
+part2Path = "res://assets/scenes/prefabs/objects/lawka_drewno/lawkaDrewnoPart2.tscn"
+partSpecialPath = "res://assets/scenes/prefabs/objects/lawka_drewno/lawkaDrewnoPartSpecial.tscn"
+threshold_damage = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e7cr8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b2gwl")

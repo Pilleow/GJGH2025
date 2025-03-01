@@ -7,7 +7,7 @@ var car_speed = 0.0
 var car_max_speed = 400.0
 var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
-var car_ground_friction = 0.01
+var car_ground_friction = 0.05
 
 var max_hp: float = 1000.0
 var hp: float = max_hp
@@ -75,7 +75,7 @@ func _move(timedelta: float):
 			#car_accel *= -0.5
 	
 	move_and_slide()
-
+	
 func _take_input():
 	var acceleration = Input.get_axis("up", "down") * car_max_accel
 	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
@@ -94,7 +94,7 @@ func _update_camera_ahead_of_car(delta):
 	camera.zoom = target_zoom
 	camera.global_position = global_position - Vector2(478.8, 0) - mod
 
-	if car_accel == 0:
+	if sign(car_accel) != sign(car_speed):
 		car_speed *= 1 - car_ground_friction
 	car_angle += steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))

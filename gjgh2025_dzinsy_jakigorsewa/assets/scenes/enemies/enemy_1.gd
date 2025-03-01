@@ -60,6 +60,7 @@ func _decide_what_to_do_based_on_state(delta: float):
 		_move(true)
 
 func _ready():
+	animSprite.play("idle")
 	add_to_group("Enemies")
 
 func hit_and_knockback(damage: float, knockback_power: float):
@@ -136,6 +137,8 @@ func _check_player_visibility():
 		player_visible = false
 
 func _physics_process(delta):
+	if not is_dead and player_visible:
+		global_rotation = global_position.angle_to_point(player.global_position) - PI/2
 	if is_dead:
 		_move(true)
 		return

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://magp0kxhbj3x"]
+
+[ext_resource type="Script" path="res://assets/scenes/prefabs/box.gd" id="1_dmblj"]
+[ext_resource type="Texture2D" uid="uid://bp3x47dju640l" path="res://assets/sprites/objects/szafka/szafka_czesc_kartka.png" id="2_0loho"]
+
+[node name="Szafka" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_dmblj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_0loho")
+offset = Vector2(1.615, 9)

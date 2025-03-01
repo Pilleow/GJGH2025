@@ -22,6 +22,7 @@ scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_u3du0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy1"]
+z_index = 190
 scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("1_wp0r1")
 animation = &"shooting"
