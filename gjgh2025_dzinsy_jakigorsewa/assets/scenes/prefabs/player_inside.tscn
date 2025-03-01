@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diu4q6now4xlo"]
+[gd_scene load_steps=19 format=3 uid="uid://diu4q6now4xlo"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside_container.gd" id="1_duc1h"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="1_t53x0"]
@@ -25,6 +25,15 @@ size = Vector2(59.2639, 65.6418)
 size = Vector2(63.0148, 43.5118)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij582"]
+size = Vector2(90.0225, 85.8966)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kgfb"]
+size = Vector2(90.0225, 85.8966)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woypb"]
+size = Vector2(90.0225, 85.8966)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laiu6"]
 size = Vector2(90.0225, 85.8966)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mq7j"]
@@ -155,6 +164,7 @@ texture = ExtResource("2_1xe42")
 
 [node name="BoostInContainer" type="Node2D" parent="."]
 script = ExtResource("7_3dbal")
+sc_boost_object_path = "res://assets/scenes/boosts/boost.tscn"
 
 [node name="BoostIn1" type="Node2D" parent="BoostInContainer"]
 
@@ -183,7 +193,7 @@ position = Vector2(0, 177.044)
 z_index = 130
 position = Vector2(-162.978, -156.414)
 rotation = 1.57079
-shape = SubResource("RectangleShape2D_ij582")
+shape = SubResource("RectangleShape2D_0kgfb")
 
 [node name="Sprite2D" type="Sprite2D" parent="BoostInContainer/BoostIn2/BoostInArea2D"]
 z_index = 85
@@ -202,7 +212,7 @@ position = Vector2(-282.071, 177.044)
 z_index = 130
 position = Vector2(-156.039, -156.414)
 rotation = 1.57079
-shape = SubResource("RectangleShape2D_ij582")
+shape = SubResource("RectangleShape2D_woypb")
 
 [node name="Sprite2D" type="Sprite2D" parent="BoostInContainer/BoostIn3/BoostInArea2D"]
 z_index = 85
@@ -221,7 +231,7 @@ position = Vector2(-282.071, 0)
 z_index = 130
 position = Vector2(-156.039, -156.414)
 rotation = 1.57079
-shape = SubResource("RectangleShape2D_ij582")
+shape = SubResource("RectangleShape2D_laiu6")
 
 [node name="Sprite2D" type="Sprite2D" parent="BoostInContainer/BoostIn4/BoostInArea2D"]
 z_index = 85
@@ -261,3 +271,4 @@ show_percentage = false
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]
 [connection signal="body_entered" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_entered"]
 [connection signal="body_exited" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_exited"]
+[connection signal="body_entered" from="BoostInContainer/BoostIn1/BoostInArea2D" to="BoostInContainer" method="_on_boost_in_area_2d_body_entered"]

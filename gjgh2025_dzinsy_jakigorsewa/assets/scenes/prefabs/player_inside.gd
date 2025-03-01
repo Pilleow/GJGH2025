@@ -10,7 +10,7 @@ var able_to_sit_down: bool = false
 var sat_down: bool = false
 
 var able_to_put_boost_in_engine: bool = false
-var current_equipped_boost = ""
+var current_holding_boost = ""
 var current_active_boosts = [
 	["car_boost", 2.0], 
 	["attack_speed", 1.5]
@@ -124,7 +124,7 @@ func _update_interact_label():
 	if able_to_sit_down:
 		interactLabel.text = "[X] Steruj działkiem"
 	elif able_to_put_boost_in_engine:
-		if current_equipped_boost == "":
+		if current_holding_boost == "":
 			interactLabel.text = "Potrzebujesz ulepszenia!"
 		else:
 			interactLabel.text = "[X] DOŁADUJ AUTO!!!"
