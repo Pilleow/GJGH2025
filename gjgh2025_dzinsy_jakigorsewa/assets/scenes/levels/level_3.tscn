@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ccp3sxj57ih18" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_s83cs"]
 
 [node name="Level1" type="Node2D"]
+position = Vector2(0, -3)
 
 [node name="Player" parent="." instance=ExtResource("1_gk8qh")]
 z_index = 1806
@@ -478,9 +479,6 @@ position = Vector2(2496, -1984)
 rotation = 1.57503
 
 [node name="EnemyContainer" type="Node2D" parent="."]
-
-[node name="Node2D6" parent="EnemyContainer" instance=ExtResource("9_yhdhd")]
-position = Vector2(-728, -1160)
 
 [node name="Node2D7" parent="EnemyContainer" instance=ExtResource("9_yhdhd")]
 position = Vector2(1088, -976)
