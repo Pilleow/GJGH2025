@@ -16,6 +16,8 @@ var target_spacing_from_point = 0.0
 var knockback_move: Vector2 = Vector2.ZERO
 var shooting_cooldown: float = shooting_cooldown_default
 
+var time_since_light_up: float = -20.0
+
 var player_visible: bool = false
 var check_player_visibility_every_seconds_default = 1.0
 var check_player_visibility_every_seconds =  randf_range(0, check_player_visibility_every_seconds_default)
@@ -63,11 +65,14 @@ func _ready():
 	animSprite.play("idle")
 	add_to_group("Enemies")
 
-func hit_and_knockback(damage: float, knockback_power: float):
+func hit_and_knockback(damage: float, knockback_power: float, obj = null):
 	if is_dead:
 		return
 	take_damage(damage)
-	knockback_move = player.velocity.normalized() * knockback_power 
+	if obj == null:
+		knockback_move = player.velocity.normalized() * knockback_power 
+	else:
+		knockback_move = obj.target_vector.normalized() * knockback_power 
 
 func _shoot(delta):
 	if not player_visible:
@@ -101,6 +106,7 @@ func _become_dead():
 	hitbox.monitorable = false
 
 func take_damage(damage: float):
+	time_since_light_up = Time.get_ticks_msec()
 	hp -= damage
 	SoundPlayer.play("RozwalenieEnemy" + str(randi_range(1, 3)))
 	if hp <= 0:
@@ -140,6 +146,11 @@ func _check_player_visibility():
 		player_visible = false
 
 func _physics_process(delta):
+	if Time.get_ticks_msec() - time_since_light_up < 300:
+		var t = (300 - (Time.get_ticks_msec() - time_since_light_up)) / 300
+		t *= t
+		$AnimatedSprite2D.modulate.g = (1 - t)
+		$AnimatedSprite2D.modulate.b = (1 - t)
 	if not is_dead and player_visible:
 		global_rotation = global_position.angle_to_point(player.global_position) - PI/2
 	if is_dead:
@@ -161,5 +172,5 @@ func _on_hitbox_area_entered(area):
 	if not par:
 		return
 	if par.is_in_group("PlayerDamageEntities"):
-		take_damage(par.get_damage_dealt())
+		hit_and_knockback(par.get_damage_dealt(), 500.0, par)
 		par.call_deferred("queue_free")

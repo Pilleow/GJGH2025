@@ -59,10 +59,8 @@ func has_boost_in_location(loc: int):
 
 func _spawn_new_boost_on_random_location():
 	if len(available_boosts_to_spawn) == 0:
-		print("NO BOOSTS AVAILABLE TO SPAWN")
 		return
 	if len(available_locations_to_spawn) == 0:
-		print("NO LOCATIONS AVAILABLE TO SPAWN")
 		return
 	var random_boost = available_boosts_to_spawn.pick_random()
 	available_boosts_to_spawn.erase(random_boost)

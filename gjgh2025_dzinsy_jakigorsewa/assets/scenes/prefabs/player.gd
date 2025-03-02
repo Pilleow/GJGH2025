@@ -43,6 +43,8 @@ var motor_pitch_scaled = 100
 var motor_max_pitch = 2.5;
 var motor_gears = 1
 
+var time_since_light_up: float = -20.0
+
 var player_past_speeds = [0.0]
 var player_speed_interval_default = 0.1
 var player_speed_interval = player_speed_interval_default
@@ -91,6 +93,8 @@ func _become_dead():
 	get_tree().change_scene_to_file("res://assets/scenes/menu/dead.tscn")
 
 func take_damage(damage: float):
+	time_since_light_up = Time.get_ticks_msec()
+	camera.apply_shake(3.0)
 	if defense_bubble_active:
 		defense_bubble_active = false
 		damage /= 2.0
@@ -210,6 +214,11 @@ func _MotorSound():
 		#$AudioStreamPlayer2D.play()
 
 func _physics_process(delta):
+	if Time.get_ticks_msec() - time_since_light_up < 300:
+		var t = (300 - (Time.get_ticks_msec() - time_since_light_up)) / 300
+		t *= t
+		carSprite.modulate.g = (1 - t)
+		carSprite.modulate.b = (1 - t)
 	enemyArrow.modulate.a = arrowOpacity
 	if arrowOpacity > 0.0:
 		waitUntilUpdateArrow -= delta

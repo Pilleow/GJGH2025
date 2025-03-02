@@ -39,11 +39,13 @@ var bullet_damage = 2.0
 @onready var turretChairSprite: Node2D = get_parent().get_node("TurretChair").get_node("AnimatedSprite2D")
 @onready var car: CharacterBody2D = null
 @onready var boostInContainer: Node2D = get_parent().get_node("BoostInContainer")
+@onready var camera: Camera2D = null
 
 func _ready():
 	turretSprite = get_tree().current_scene.find_child("CarTurretSprite")
 	turretChairSprite.play("empty")
 	car = get_tree().current_scene.find_child("Player")
+	camera = car.get_node("Camera2D")
 
 func _move_turret():
 	if not turretSprite:
@@ -159,7 +161,6 @@ func _interact_with_environent():
 		repairing_time_left = one_hp_repair_time
 		animSprite.play("repairing")
 
-
 func _update_interact_label():
 	interactLabel.text = ""
 	if able_to_sit_down:
@@ -178,8 +179,8 @@ func _update_interact_label():
 		else:
 			interactLabel.text = "Nie da się więcej naprawić"
 
-
 func _shoot_bullet(speed: float):
+	#camera.apply_shake(1.0)
 	SoundPlayer.play("StrzalPlayer", randf_range(0.8, 1.2))
 	var b = bullet.instantiate()
 	var dx = sin(turretSprite.global_rotation)

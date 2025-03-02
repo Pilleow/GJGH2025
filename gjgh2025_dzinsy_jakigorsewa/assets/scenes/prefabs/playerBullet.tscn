@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://coj2g5ph0e5c4"]
+[gd_scene load_steps=4 format=3 uid="uid://2vaf66t7xjyi"]
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/bullet.gd" id="1_ygalc"]
 [ext_resource type="Texture2D" uid="uid://bansoms64mgsb" path="res://assets/sprites/objects/kulac.png" id="2_4o3qy"]

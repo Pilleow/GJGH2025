@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dr0ww0mu7dxli"]
+[gd_scene load_steps=14 format=4 uid="uid://dr0ww0mu7dxli"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
@@ -11,12 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://hpxwkoq7qpeu" path="res://assets/scenes/prefabs/objects/lawka_drewno/lawkaDrewno.tscn" id="9_fa4xu"]
 [ext_resource type="FontFile" uid="uid://dxldktvny5fhq" path="res://assets/fonts/ARCADE_I.TTF" id="10_kta66"]
 [ext_resource type="PackedScene" uid="uid://ccp3sxj57ih18" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="10_ndbu7"]
+[ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="12_xenbq"]
+[ext_resource type="PackedScene" uid="uid://blls8ihuvhaef" path="res://assets/scenes/enemies/Enemy3.tscn" id="13_adsd7"]
 
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_nc23y")]
 z_index = 1806
-position = Vector2(-2110, 3525)
+position = Vector2(-809, 1846)
 
 [node name="Map" type="TileMapLayer" parent="."]
 z_index = 1620
@@ -494,3 +496,9 @@ theme_override_font_sizes/font_size = 86
 text = "TEN PO LEWEJ
 DRIFTUJ
 SHIFT"
+
+[node name="Node2D" parent="." instance=ExtResource("12_xenbq")]
+position = Vector2(-476, 1577)
+
+[node name="Node2D2" parent="." instance=ExtResource("13_adsd7")]
+position = Vector2(-240, 1401)
