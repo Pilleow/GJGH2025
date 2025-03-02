@@ -49,6 +49,8 @@ var player_past_speeds = [0.0]
 var player_speed_interval_default = 0.1
 var player_speed_interval = player_speed_interval_default
 
+@onready var winda = get_tree().current_scene.find_child("NextLevelTrigger").get_node("CollisionShape2D")
+
 @onready var carSquashFront: Area2D = $EnemySquash
 @onready var carCollider: CollisionShape2D = $CarCollision
 @onready var pl2df: PointLight2D = $PointLight2DFront
@@ -224,25 +226,31 @@ func _physics_process(delta):
 		waitUntilUpdateArrow -= delta
 		if waitUntilUpdateArrow <= 0:
 			waitUntilUpdateArrow = updateArrowEvery
-			var closest_enemy = null
-			var closest_dist = 2**63-1
-			for e in get_tree().get_nodes_in_group("Enemies"):
-				if not e.is_dead:
-					var d = global_position.distance_squared_to(e.global_position)
-					if d < closest_dist:
-						closest_enemy = e
-						closest_dist = d
-			if closest_enemy == null:
-				enemyArrow.hide()
-			else:
-				if closest_enemy != current_arrow_aiming_at:
-					last_aim_change = Time.get_ticks_msec() / 1000.0
-					arrowOpacity = 0.0
+			if enemiesToKill == 0:
 				enemyArrow.show()
 				enemyArrow.global_rotation = global_position.angle_to_point(
-					closest_enemy.global_position
+					winda.global_position
 				) + PI/2
-				current_arrow_aiming_at = closest_enemy
+			else:
+				var closest_enemy = null
+				var closest_dist = 2**63-1
+				for e in get_tree().get_nodes_in_group("Enemies"):
+					if not e.is_dead:
+						var d = global_position.distance_squared_to(e.global_position)
+						if d < closest_dist:
+							closest_enemy = e
+							closest_dist = d
+				if closest_enemy == null:
+					enemyArrow.hide()
+				else:
+					if closest_enemy != current_arrow_aiming_at:
+						last_aim_change = Time.get_ticks_msec() / 1000.0
+						arrowOpacity = 0.0
+					enemyArrow.show()
+					enemyArrow.global_rotation = global_position.angle_to_point(
+						closest_enemy.global_position
+					) + PI/2
+					current_arrow_aiming_at = closest_enemy
 	if Time.get_ticks_msec() / 1000.0 - last_aim_change > 3.0 and arrowOpacity < 1.0:
 		arrowOpacity = Time.get_ticks_msec() / 1000.0 - last_aim_change - 3.0
 	

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="9_yhdhd"]
 [ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="10_as51b"]
 [ext_resource type="PackedScene" uid="uid://blls8ihuvhaef" path="res://assets/scenes/enemies/Enemy3.tscn" id="11_6wov5"]
-[ext_resource type="PackedScene" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_b4xeh"]
+[ext_resource type="PackedScene" uid="uid://bhu7jq2rxyixn" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_b4xeh"]
 [ext_resource type="PackedScene" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_s83cs"]
 
 [node name="Level1" type="Node2D"]
@@ -562,7 +562,7 @@ color = Color(0.39, 0.39, 0.39, 1)
 
 [node name="NextLevelTrigger" parent="." instance=ExtResource("12_b4xeh")]
 position = Vector2(12613, -193)
-nextLevelPath = "res://assets/scenes/levels/cutscenka_end.tscn"
+nextLevelPath = "res://assets/scenes/levels/LevelFinal.tscn"
 
 [node name="TurnOnBGMLoop" parent="." instance=ExtResource("13_s83cs")]
 position = Vector2(3, -480)

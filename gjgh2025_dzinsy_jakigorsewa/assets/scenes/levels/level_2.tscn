@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="9_51chg"]
 [ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="10_alj0v"]
 [ext_resource type="PackedScene" uid="uid://blls8ihuvhaef" path="res://assets/scenes/enemies/Enemy3.tscn" id="11_co1hr"]
-[ext_resource type="PackedScene" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_s4jbe"]
+[ext_resource type="PackedScene" uid="uid://bhu7jq2rxyixn" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_s4jbe"]
 [ext_resource type="PackedScene" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_rsjbk"]
 
 [node name="Level1" type="Node2D"]
