@@ -1,9 +1,92 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://bcp6mlnbcv5jd"]
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://cmiue1ktmyji4"]
+
+[ext_resource type="Texture2D" uid="uid://bsdjrq2rbwstb" path="res://assets/sprites/other/cutscene_end_1.png" id="1_oeckn"]
 
 [resource]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oeckn")
+}],
+"loop": false,
 "name": &"default",
 "speed": 1.0
 }]

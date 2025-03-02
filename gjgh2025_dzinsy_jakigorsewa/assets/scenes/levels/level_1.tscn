@@ -467,7 +467,7 @@ offset_bottom = 1553.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
 theme_override_font_sizes/font_size = 60
-text = "TEN PO PRAWEJ
+text = "TEN PO LEWEJ
 STRZELAJ "
 
 [node name="ruszaj4" type="Label" parent="."]
@@ -479,5 +479,5 @@ offset_bottom = -114.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
 theme_override_font_sizes/font_size = 60
-text = "TEN PO LEWEJ
+text = "TEN PO PRAWEJ
 DRIFTUJ SHIFT"
