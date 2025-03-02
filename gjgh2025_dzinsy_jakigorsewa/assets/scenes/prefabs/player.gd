@@ -3,6 +3,17 @@ extends CharacterBody2D
 var defense_bubble_active = false
 var boost_car_speed_multiplier: float = 1.0
 
+## drifting -------------------------
+var push_force = 0.0
+var push_force_max = 200
+var drift_brake_speed = 6.0;
+var push_velocity = Vector2.ZERO;
+var drifting = false;
+
+var angle1 = 0.0
+var prev_angle1 = 0.0
+## drifting ^^^^-------------------------
+
 var car_angle = 0.0
 var car_accel = 0.0
 var car_max_accel = 5.0
@@ -78,8 +89,39 @@ func _move(timedelta: float):
 		car_speed = car_max_speed * sign(car_speed)
 	if car_accel == 0:
 		car_speed *= 1 - car_ground_friction
-	car_angle += steering_angle * car_speed / car_max_speed
+	prev_angle1 = angle1;
+	angle1 = rad_to_deg(car_angle);
+	car_angle += 2*steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
+	print(car_speed)
+	if(drifting and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))):
+		car_speed -= drift_brake_speed *sign(car_speed)
+		#* car_speed / car_max_speed;
+		if(car_speed >= 0):
+			if(push_force <= push_force_max):
+				push_force += 20;
+			else:
+				push_force = push_force_max 
+		else:
+			if(push_force >= push_force_max):
+				push_force -= 20;
+			else:
+				push_force = (-push_force_max)
+			push_force = -push_force_max ;
+			
+		if(angle1 - prev_angle1 > 0):
+			push_velocity = Vector2(push_force* sin(car_angle - PI/2), push_force * cos(car_angle - PI/2));
+		else:
+			push_velocity = Vector2(push_force* sin(car_angle + PI/2), push_force * cos(car_angle + PI/2));
+	else:
+		if push_force != 0:
+			push_force -= sign(push_force)*75	
+		push_velocity = Vector2.ZERO
+		
+	velocity.x = car_speed * sin(car_angle) + push_velocity.x;
+	velocity.y = car_speed * cos(car_angle) + push_velocity.y;
+	velocity = velocity.normalized()* abs(car_speed);
+
 	
 	#var lslidecol = get_last_slide_collision()
 	#if lslidecol != null:
@@ -89,6 +131,8 @@ func _move(timedelta: float):
 			#car_accel *= -0.5
 	
 	move_and_slide()
+	$CarCollision/CarCenter.global_position
+	
 	
 func _take_input():
 	var acceleration = Input.get_axis("up", "down") * car_max_accel
@@ -97,7 +141,12 @@ func _take_input():
 	_accel_set(acceleration)
 	var rotation = Input.get_axis("left", "right")
 	_steer_set(rotation)
-
+	
+	if(Input.is_action_pressed("Drift")):
+		drifting = true;
+	else:
+		drifting = false;
+	
 func _update_camera_ahead_of_car(delta):
 	var mult = 0.03
 	var mod = -velocity * abs(car_speed) / car_max_speed * mult
@@ -110,8 +159,6 @@ func _update_camera_ahead_of_car(delta):
 
 	if sign(car_accel) != sign(car_speed):
 		car_speed *= 1 - car_ground_friction
-	car_angle += steering_angle * car_speed / car_max_speed
-	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
 	
 	move_and_slide()
 	
