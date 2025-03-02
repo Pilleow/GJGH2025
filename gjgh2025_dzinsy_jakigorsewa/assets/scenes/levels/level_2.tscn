@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cb1qhtq55bq3b"]
+[gd_scene load_steps=14 format=4 uid="uid://bkor1nontx0ds"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="1_rewy5"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_bt0ya"]
@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="9_51chg"]
 [ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="10_alj0v"]
 [ext_resource type="PackedScene" uid="uid://blls8ihuvhaef" path="res://assets/scenes/enemies/Enemy3.tscn" id="11_co1hr"]
-[ext_resource type="PackedScene" uid="uid://ccp4y3wmkytrn" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_s4jbe"]
-[ext_resource type="PackedScene" uid="uid://ccp3sxj57ih18" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_rsjbk"]
+[ext_resource type="PackedScene" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_s4jbe"]
+[ext_resource type="PackedScene" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_rsjbk"]
 
 [node name="Level1" type="Node2D"]
 

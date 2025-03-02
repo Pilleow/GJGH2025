@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dumqls8s8qko4"]
+[gd_scene load_steps=3 format=3 uid="uid://bpd86fvf0l3ca"]
 
 [ext_resource type="Script" path="res://assets/scenes/levels/cutscenka_end.gd" id="1_mic4r"]
-[ext_resource type="SpriteFrames" uid="uid://bcp6mlnbcv5jd" path="res://assets/scenes/levels/curscenkaEnd.tres" id="2_y0hpy"]
+[ext_resource type="SpriteFrames" path="res://assets/scenes/levels/curscenkaEnd.tres" id="2_y0hpy"]
 
 [node name="CutscenkaEnd" type="Node2D"]
 script = ExtResource("1_mic4r")
