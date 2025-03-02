@@ -10,8 +10,10 @@ func _ready():
 	for child in get_children():
 		sounds[child.name] = child
 
-func play(name: String):
+func play(name: String, pitch_scale:float = 1.0):
 	sounds[name].play()
+	if pitch_scale != 1.0:
+		sounds[name].set_pitch_scale(pitch_scale)
 
 func _physics_process(delta):
 	if is_instance_valid(camera):

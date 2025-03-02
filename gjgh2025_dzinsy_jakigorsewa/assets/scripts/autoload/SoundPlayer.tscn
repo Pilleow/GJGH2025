@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://jrx140ici6yn"]
+[gd_scene load_steps=10 format=3 uid="uid://jrx140ici6yn"]
 
 [ext_resource type="AudioStream" uid="uid://chqrogcj42nx1" path="res://assets/sounds/sfx/rozwalanie.wav" id="1_1oma8"]
 [ext_resource type="Script" path="res://assets/scripts/autoload/sound_player.gd" id="1_of8s0"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://dvk83bvfabkfj" path="res://assets/sounds/sfx/rozwalanie4.wav" id="4_unkd3"]
 [ext_resource type="AudioStream" uid="uid://cjsiolbr12pqm" path="res://assets/sounds/sfx/strzał.wav" id="6_p31rs"]
 [ext_resource type="AudioStream" uid="uid://ci1p453yt2tom" path="res://assets/sounds/sfx/strzelanie laser.wav" id="7_7e1jd"]
+[ext_resource type="AudioStream" uid="uid://fylxflm1ewxx" path="res://assets/sounds/sfx/barcode_enemy.mp3" id="8_2gr6v"]
+[ext_resource type="AudioStream" uid="uid://dj0uk3ctdbu" path="res://assets/sounds/sfx/camera_enemy.wav" id="9_qsgh7"]
 
 [node name="SoundPlayer" type="Node2D"]
 script = ExtResource("1_of8s0")
@@ -30,3 +32,13 @@ stream = ExtResource("6_p31rs")
 [node name="StrzalEnemy" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_7e1jd")
 volume_db = 5.98
+
+[node name="StrzalEnemy1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2gr6v")
+volume_db = -15.0
+max_polyphony = 4
+
+[node name="StrzalEnemy3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_qsgh7")
+volume_db = 5.0
+max_polyphony = 4

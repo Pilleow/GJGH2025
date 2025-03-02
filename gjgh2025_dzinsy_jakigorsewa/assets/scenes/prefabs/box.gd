@@ -55,7 +55,7 @@ func hit_and_knockback(damage: float, knockback_power: float, random_spread:floa
 	knockback_slowdown = randf_range(0.6, 0.9)
 	rotation_change = randf_range(-PI/13, PI/13)
 	if damage > threshold_damage:
-		SoundPlayer.play("RozwalenieObiekt")
+		SoundPlayer.play("RozwalenieObiekt", randf_range(0.8, 1.2)  )
 		_spawn_parts_and_destroy()
 
 func _move():

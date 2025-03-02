@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var defense_bubble_active = false
 var boost_car_speed_multiplier: float = 1.0
-
+  
 ## drifting -------------------------
 var push_force = 0.0
 var push_force_max = 200

@@ -75,7 +75,7 @@ func _shoot(delta):
 	if shooting_cooldown > 0:
 		shooting_cooldown -= delta
 		return
-	SoundPlayer.play("StrzalEnemy")
+	SoundPlayer.play("StrzalEnemy1", randf_range(0.95, 1.05))
 	animSprite.play("shooting")
 	playingShootAnimation = true
 	shooting_cooldown = shooting_cooldown_default
