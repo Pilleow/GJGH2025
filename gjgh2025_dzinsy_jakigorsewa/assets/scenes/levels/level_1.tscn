@@ -18,7 +18,7 @@
 
 [node name="Player" parent="." instance=ExtResource("2_nc23y")]
 z_index = 1806
-position = Vector2(-809, 1846)
+position = Vector2(-2116, 3532)
 
 [node name="Map" type="TileMapLayer" parent="."]
 z_index = 1620
@@ -437,52 +437,39 @@ color = Color(0.39, 0.39, 0.39, 1)
 
 [node name="ruszaj" type="Label" parent="."]
 z_index = 2775
-offset_left = -2607.0
-offset_top = 3764.0
-offset_right = -1596.0
-offset_bottom = 3963.0
+offset_left = -2494.0
+offset_top = 3724.0
+offset_right = -1483.0
+offset_bottom = 3923.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
-theme_override_font_sizes/font_size = 86
-text = "TEN PO LEWEJ
+theme_override_font_sizes/font_size = 60
+text = "TEN PO PRAWEJ
 RUSZAJ  WASD"
 
 [node name="ruszaj5" type="Label" parent="."]
 z_index = 2775
-offset_left = -729.0
-offset_top = -3421.0
-offset_right = 871.0
-offset_bottom = -3222.0
+offset_left = -571.0
+offset_top = -3367.0
+offset_right = 1029.0
+offset_bottom = -3168.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
-theme_override_font_sizes/font_size = 86
+theme_override_font_sizes/font_size = 60
 text = "NASTEPNY POZIOM JAK
 ZABIJESZ WSZYSTKICH"
 
 [node name="ruszaj2" type="Label" parent="."]
 z_index = 2775
-offset_left = -2149.0
-offset_top = 1311.0
-offset_right = -1055.0
-offset_bottom = 1510.0
+offset_left = -2174.0
+offset_top = 1354.0
+offset_right = -1080.0
+offset_bottom = 1553.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
-theme_override_font_sizes/font_size = 86
+theme_override_font_sizes/font_size = 60
 text = "TEN PO PRAWEJ
 STRZELAJ "
-
-[node name="ruszaj3" type="Label" parent="."]
-z_index = 2775
-offset_left = 435.0
-offset_top = 916.0
-offset_right = 1529.0
-offset_bottom = 1115.0
-rotation = 1.22184
-theme_override_constants/line_spacing = 25
-theme_override_fonts/font = ExtResource("10_kta66")
-theme_override_font_sizes/font_size = 86
-text = "TEN PO LEWEJ
-TARANUJ "
 
 [node name="ruszaj4" type="Label" parent="."]
 z_index = 2775
@@ -492,10 +479,9 @@ offset_right = -423.0
 offset_bottom = -114.0
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("10_kta66")
-theme_override_font_sizes/font_size = 86
+theme_override_font_sizes/font_size = 60
 text = "TEN PO LEWEJ
-DRIFTUJ
-SHIFT"
+DRIFTUJ SHIFT"
 
 [node name="Node2D" parent="." instance=ExtResource("12_xenbq")]
 position = Vector2(-476, 1577)

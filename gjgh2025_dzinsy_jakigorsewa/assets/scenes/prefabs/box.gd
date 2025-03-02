@@ -46,13 +46,13 @@ func _spawn_parts_and_destroy():
 		var b1 = b.instantiate()
 		b1.global_position = global_position
 		get_tree().current_scene.add_child(b1)
-		b1.hit_and_knockback(0, knockback_move.length()/2, PI/2)
+		b1.hit_and_knockback(0, knockback_move.length()/2, PI /2)
 		queue_free()
 
 func hit_and_knockback(damage: float, knockback_power: float, random_spread:float = 0.0):
 	var v = player.velocity.normalized().rotated(randf_range(-random_spread/2, random_spread/2))
 	knockback_move = -v * knockback_power 
-	knockback_slowdown = randf_range(0.6, 0.9)
+	knockback_slowdown = randf_range(0.6, 0.96)
 	rotation_change = randf_range(-PI/13, PI/13)
 	if damage > threshold_damage:
 		SoundPlayer.play("RozwalenieObiekt", randf_range(0.8, 1.2)  )
