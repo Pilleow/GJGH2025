@@ -95,8 +95,8 @@ func _become_dead():
 	var toward_player = (player.global_position - global_position).normalized()  * 1000
 	knockback_move = toward_player
 	collisionShape.disabled = true
-	hitbox.monitoring = false
-	hitbox.monitorable = false
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
 
 func take_damage(damage: float):
 	hp -= damage
@@ -118,7 +118,7 @@ func _move(disable_voluntary_movement: bool = false):
 		enemy_move = Vector2.ZERO
 	velocity = enemy_move * enemy_speed + knockback_move
 	if knockback_move:
-		knockback_move *= 0.9
+		knockback_move *= 0.92
 	if not playingShootAnimation and not is_dead:
 		animSprite.play("idle")
 	move_and_slide()

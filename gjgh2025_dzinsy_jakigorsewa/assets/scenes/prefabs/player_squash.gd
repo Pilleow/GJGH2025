@@ -4,7 +4,7 @@ extends Area2D
 @onready var camera: Camera2D = get_parent().get_node("Camera2D")
 
 var squash_damage_max: float = 2.0
-var squash_knockback_max: float = 5500.0
+var squash_knockback_max: float = 3000.0
 
 var shake_strength = 0.0  # Initial strength of the shake
 var shake_decay = 2.0      # How fast the shake stops

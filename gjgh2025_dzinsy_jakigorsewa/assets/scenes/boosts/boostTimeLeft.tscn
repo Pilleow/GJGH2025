@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://8qdifidrebcb"]
+
+[ext_resource type="Script" path="res://assets/scenes/boosts/boost_time_left.gd" id="1_rs8de"]
+[ext_resource type="Texture2D" uid="uid://ss66wwwotvvn" path="res://assets/sprites/objects/boost3.png" id="2_6758j"]
+[ext_resource type="Texture2D" uid="uid://1s5hnsl44lq6" path="res://assets/sprites/objects/boost4.png" id="3_to8qs"]
+[ext_resource type="Texture2D" uid="uid://covaj7h5odfv1" path="res://assets/sprites/objects/boost2.png" id="4_pg12m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v52y8"]
+bg_color = Color(0.133333, 0.129412, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8yk3"]
+bg_color = Color(0.988235, 0.988235, 0.988235, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="BoostTimer" type="Node2D"]
+z_index = 2665
+position = Vector2(18, 18)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_rs8de")
+
+[node name="SpeedBoostSprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 3550
+texture = ExtResource("2_6758j")
+
+[node name="AttackBoostSprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 2845
+texture = ExtResource("3_to8qs")
+
+[node name="DefenceBubbleSprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 2845
+texture = ExtResource("4_pg12m")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 4096
+offset_left = 105.0
+offset_top = -35.0
+offset_right = 895.0
+offset_bottom = 35.0
+theme_override_styles/background = SubResource("StyleBoxFlat_v52y8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h8yk3")
+value = 100.0
+show_percentage = false
