@@ -32,9 +32,11 @@ var boost_spawn_4_current_boost = null
 @onready var nextBoostInProgressBar2 = $PlayerInsideUI/NextBoostIn2
 
 @onready var available_boosts_to_spawn = [
-	"boost_car_speed_multiplier",
+
+	"boost_car_accel_multiplier",
 	"boost_turret_shooting_speed",
-	"defense_bubble_active"
+	"defense_bubble_active",
+	"auto_repair_times"
 ]
 
 var time_every_boost_coming_in = 1.0
@@ -69,6 +71,8 @@ func _spawn_new_boost_on_random_location():
 	var inst = sc_boost_object.instantiate()
 	inst.set_type(random_boost)
 	inst.position = random_location.get_node("BoostInArea2D").get_node("Sprite2D").position + random_location.position
+	add_child(inst)
+	
 	playerInsideContainer.add_child(inst)
 	if random_location.name.ends_with("1"):
 		boost_spawn_1_current_boost = inst

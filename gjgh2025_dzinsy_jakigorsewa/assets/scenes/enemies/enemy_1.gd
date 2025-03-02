@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var max_hp: float = 3.0
-@export var shooting_range: float = 2000.0
+@export var shooting_range: float = 4000.0
 @export_file("*.tscn") var bullet_path = ""
 @onready var bullet = load(bullet_path)
 @export var bullet_damage: float = 1.0
@@ -18,7 +18,7 @@ var shooting_cooldown: float = shooting_cooldown_default
 
 var player_visible: bool = false
 var check_player_visibility_every_seconds_default = 1.0
-var check_player_visibility_every_seconds = check_player_visibility_every_seconds_default
+var check_player_visibility_every_seconds =  randf_range(0, check_player_visibility_every_seconds_default)
 
 var is_dead: bool = false
 
@@ -66,9 +66,7 @@ func _ready():
 func hit_and_knockback(damage: float, knockback_power: float):
 	if is_dead:
 		return
-	hp -= damage
-	if hp <= 0:
-		_become_dead()
+	take_damage(damage)
 	knockback_move = player.velocity.normalized() * knockback_power 
 
 func _shoot(delta):
@@ -77,6 +75,7 @@ func _shoot(delta):
 	if shooting_cooldown > 0:
 		shooting_cooldown -= delta
 		return
+	SoundPlayer.play("StrzalEnemy1", randf_range(0.95, 1.05))
 	animSprite.play("shooting")
 	playingShootAnimation = true
 	shooting_cooldown = shooting_cooldown_default
@@ -90,6 +89,9 @@ func _shoot(delta):
 	get_tree().current_scene.add_child(b)
 	
 func _become_dead():
+	if is_dead:
+		return
+	player.handle_enemy_died()
 	is_dead = true
 	animSprite.play("dead")
 	var toward_player = (player.global_position - global_position).normalized()  * 1000
@@ -100,6 +102,7 @@ func _become_dead():
 
 func take_damage(damage: float):
 	hp -= damage
+	SoundPlayer.play("RozwalenieEnemy" + str(randi_range(1, 3)))
 	if hp <= 0:
 		_become_dead()
 

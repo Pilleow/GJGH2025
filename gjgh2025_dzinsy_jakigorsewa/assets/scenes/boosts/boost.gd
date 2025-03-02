@@ -11,12 +11,14 @@ var dest_scale = 0.5
 
 func set_type(t: String):
 	boost_type = t
-	if t == "boost_car_speed_multiplier":
+	if t == "boost_car_accel_multiplier":
 		$SpeedBoostSprite2D.show()
 	elif t == "boost_turret_shooting_speed":
 		$AttackBoostSprite2D.show()
 	elif t == "defense_bubble_active":
 		$DefenceBubbleSprite2D.show()
+	elif t == "auto_repair_times":
+		$AutoRepairSprite2D.show()
 
 func _physics_process(delta):
 	var ticks = Time.get_ticks_msec() / 1000.0

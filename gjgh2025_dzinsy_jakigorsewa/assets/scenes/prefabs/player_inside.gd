@@ -2,12 +2,18 @@ extends CharacterBody2D
 
 var boost_turret_shooting_speed: float = 1.0
 
-var speed = 650.0
+var speed = 800.0
 var turret_rotation: float = 0.0
 var turret_rotation_max_speed: float = 0.1
 
 var able_to_sit_down: bool = false
 var sat_down: bool = false
+
+var auto_repair_times: int = 0
+var able_to_repair_car: bool = false
+var is_repairing: bool = false
+var repairing_time_left: float = 0.0
+var one_hp_repair_time: float = 0.25
 
 var able_to_pickup_boost_location: int = 0
 
@@ -65,18 +71,19 @@ func add_boost_to_car(boost: String, time: float):
 	_update_existing_boost_effects()
 
 func _update_existing_boost_effects():
-	car.boost_car_speed_multiplier = 1.0
+	car.boost_car_accel_multiplier = 1.0
 	boost_turret_shooting_speed = 1.0
 	
 	for eff in current_active_boosts:
-		if eff[0] == "boost_car_speed_multiplier":
-			car.boost_car_speed_multiplier = 2.0
-			# this should only boost the speed when the car player holds down a TURBO button!
+		if eff[0] == "boost_car_accel_multiplier":
+			car.boost_car_accel_multiplier = 3.0
 		elif eff[0] == "boost_turret_shooting_speed":
 			boost_turret_shooting_speed = 2.0
 		elif eff[0] == "defense_bubble_active":
 			car.defense_bubble_active = true
 			car.defenseBubble.show()
+		elif eff[0] == "auto_repair_times":
+			auto_repair_times += 8 
 
 func _update_boost_clocks(delta):
 	for index in len(current_active_boosts):
@@ -87,6 +94,8 @@ func _update_boost_clocks(delta):
 			_update_existing_boost_effects()
 
 func _move_person():
+	if is_repairing:
+		return
 	var y_direction = Input.get_axis("designer_up", "designer_down")
 	if y_direction:
 		velocity.y = move_toward(velocity.y, y_direction * speed, speed/3)
@@ -128,9 +137,10 @@ func _toggle_sit_down():
 
 func _put_boost_in_engine():
 	var time = {
-		"boost_car_speed_multiplier": 5.0,
+		"boost_car_accel_multiplier": 5.0,
 		"boost_turret_shooting_speed": 6.0,
-		"defense_bubble_active": 1.0
+		"defense_bubble_active": 1.0,
+		"auto_repair_times": 2.0
 	}[current_holding_boost.boost_type]
 	add_boost_to_car(current_holding_boost.boost_type, time)
 	current_holding_boost.call_deferred("queue_free")
@@ -144,6 +154,12 @@ func _interact_with_environent():
 	if boostInContainer.has_boost_in_location(able_to_pickup_boost_location):
 		boostInContainer.take_boost_from_location(able_to_pickup_boost_location)
 
+	if able_to_repair_car and car.hp < car.max_hp - car.unrecoverable_hp:
+		is_repairing = true
+		repairing_time_left = one_hp_repair_time
+		animSprite.play("repairing")
+
+
 func _update_interact_label():
 	interactLabel.text = ""
 	if able_to_sit_down:
@@ -152,19 +168,26 @@ func _update_interact_label():
 		if not current_holding_boost:
 			interactLabel.text = "Potrzebujesz ulepszenia!"
 		else:
-			interactLabel.text = "[X] DOŁADUJ AUTO!!!"
+			interactLabel.text = "[X] DOŁADUJ AUTKO!!!!"
 	elif boostInContainer.has_boost_in_location(able_to_pickup_boost_location):
 		if not current_holding_boost:
 			interactLabel.text = "[X] Podnieś doładowanie"
+	elif able_to_repair_car:
+		if car.hp < car.max_hp - car.unrecoverable_hp:
+			interactLabel.text = "[X] Napraw autko"
+		else:
+			interactLabel.text = "Nie da się więcej naprawić"
+
 
 func _shoot_bullet(speed: float):
+	SoundPlayer.play("StrzalPlayer", randf_range(0.8, 1.2))
 	var b = bullet.instantiate()
 	var dx = sin(turretSprite.global_rotation)
 	var dy = -cos(turretSprite.global_rotation)
 	var tv = Vector2(
 		turretSprite.position.x + dx,
 		turretSprite.position.y + dy
-	)
+	) 
 	b.global_position = turretSprite.global_position + Vector2(dx, dy) * 80.0
 	b.set_damage(bullet_damage)
 	b.set_speed(speed)
@@ -177,6 +200,19 @@ func _physics_process(delta):
 	_move(delta)
 	_update_interact_label()
 	_update_boost_clocks(delta)
+	
+	if is_repairing and not Input.is_action_pressed("designer_interact"):
+		is_repairing = false
+	if (is_repairing or auto_repair_times) and car.hp < car.max_hp - car.unrecoverable_hp:
+		repairing_time_left -= delta
+		if repairing_time_left <= 0:
+			car.hp += min(0.25, car.max_hp - car.unrecoverable_hp - car.hp)
+			car._update_hp_bar()
+			repairing_time_left = one_hp_repair_time
+			auto_repair_times -= 1
+	elif auto_repair_times > 0:
+		auto_repair_times = 0 
+	
 	if Input.is_action_just_pressed("designer_interact"):
 		_interact_with_environent()
 	if sat_down:
@@ -231,3 +267,12 @@ func _on_boost4_in_area_2d_body_entered(body):
 func _on_boost4_in_area_2d_body_exited(body):
 	if body.name == "PlayerInside":
 		able_to_pickup_boost_location = 0
+
+func _on_repair_area_2d_body_entered(body):
+	if body.name == "PlayerInside":
+		able_to_repair_car = true
+
+func _on_repair_area_2d_body_exited(body):
+	if body.name == "PlayerInside":
+		able_to_repair_car = false
+

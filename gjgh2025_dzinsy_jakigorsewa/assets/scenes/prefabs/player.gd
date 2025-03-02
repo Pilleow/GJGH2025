@@ -1,18 +1,26 @@
 extends CharacterBody2D
 
 var defense_bubble_active = false
-var boost_car_speed_multiplier: float = 1.0
 
-## drifting -------------------------
+var boost_car_accel_multiplier: float = 1.0
+  
+var enemiesToKill: int = 0
+
+
 var push_force = 0.0
 var push_force_max = 200
 var drift_brake_speed = 6.0;
 var push_velocity = Vector2.ZERO;
 var drifting = false;
 
+var updateArrowEvery = 0.1
+var arrowOpacity: float = 0.0
+var waitUntilUpdateArrow = updateArrowEvery
+var last_aim_change: float = 0.0
+var current_arrow_aiming_at = null
+
 var angle1 = 0.0
 var prev_angle1 = 0.0
-## drifting ^^^^-------------------------
 
 var car_angle = 0.0
 var car_accel = 0.0
@@ -23,8 +31,11 @@ var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
-var max_hp: float = 10.0
-var hp: float = max_hp
+
+var max_hp: float = 12425.0
+var hp: float = max_hp 
+var unrecoverable_hp: float = 0.0
+
 
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]
@@ -47,17 +58,37 @@ var player_speed_interval = player_speed_interval_default
 @onready var carHitbox: Area2D = $CarHitbox
 @onready var camera: Camera2D = $Camera2D
 @onready var hpBar: ProgressBar = $UI/ProgressBar
+@onready var hpBarUnrecoverable: ProgressBar = $UI/ProgressBarUnrecoverable
+@onready var enemyArrow: Node2D = $ArrowContainer
+
+@export_file("*.tscn") var deadScenePath: String = ""
+
+func _ready_deferred():
+	enemiesToKill = len(get_tree().get_nodes_in_group("Enemies"))
 
 @export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
+	SoundPlayer.update_bgm("BGM1Start")
+	SoundPlayer.set_camera_to(camera)
+	call_deferred("_ready_deferred")
+	_update_hp_bar()
 	show()
+
+func _update_hp_bar():
+	hpBar.value = hp / max_hp * 100.0 
+	hpBarUnrecoverable.value = (max_hp - unrecoverable_hp) / max_hp * 100.0
 
 func _steer_set(sang: float):
 	if sang < steering_angle_limit[0] or sang > steering_angle_limit[1]:
 		return false
 	steering_angle = move_toward(steering_angle, sang / 50.0, 0.005)
 	return true
+
+func handle_enemy_died():
+	enemiesToKill -= 1
+	if enemiesToKill == 0:
+		SoundPlayer.update_bgm("BGM1End")
 
 func _become_dead():
 	hide()
@@ -69,14 +100,17 @@ func take_damage(damage: float):
 		damage /= 2.0
 		damage = float(int(damage))
 		defenseBubble.hide()
-	print(damage)
+
+	elif unrecoverable_hp < max_hp - 5.0:
+		unrecoverable_hp += damage / 6.0
+
 	hp -= damage
 	if hp <= 0:
 		_become_dead()
-	hpBar.value = hp / max_hp * 100.0
+	_update_hp_bar()
 
 func _accel_set(acc: float):
-	car_accel = acc
+	car_accel = acc * boost_car_accel_multiplier
 
 func _brake(force: float):
 	car_speed *= 1.0 - force * car_brake_efficiency
@@ -93,7 +127,6 @@ func _move(timedelta: float):
 	angle1 = rad_to_deg(car_angle);
 	car_angle += 2*steering_angle * car_speed / car_max_speed
 	velocity = Vector2(car_speed * sin(car_angle), car_speed * cos(car_angle))
-	print(car_speed)
 	if(drifting and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))):
 		car_speed -= drift_brake_speed *sign(car_speed)
 		#* car_speed / car_max_speed;
@@ -164,8 +197,9 @@ func _update_camera_ahead_of_car(delta):
 	
 func _MotorSound():
 	motor_pitch = (abs(car_speed))/car_max_speed * motor_max_pitch
-	motor_pitch_scaled = (int(abs(car_speed) / 8)) % 60 + 60
-	motor_pitch = 2.5 * motor_pitch_scaled / 100;
+	var t = int(abs(car_speed) / 6)
+	motor_pitch_scaled = (t) % 40 + 0
+	motor_pitch = 1 + 1.5 * motor_pitch_scaled / 100;
 	
 	#if(motor_pitch >=  motor_max_pitch ):
 		#if(motor_gears < 5):
@@ -176,10 +210,37 @@ func _MotorSound():
 	if($AudioStreamPlayer2D.pitch_scale < 1.0):
 		$AudioStreamPlayer2D.pitch_scale = 1.0 
 		
-	if not $AudioStreamPlayer2D.playing:
-		$AudioStreamPlayer2D.play()
+	#if not $AudioStreamPlayer2D.playing:
+		#$AudioStreamPlayer2D.play()
 
 func _physics_process(delta):
+	enemyArrow.modulate.a = arrowOpacity
+	if arrowOpacity > 0.0:
+		waitUntilUpdateArrow -= delta
+		if waitUntilUpdateArrow <= 0:
+			waitUntilUpdateArrow = updateArrowEvery
+			var closest_enemy = null
+			var closest_dist = 2**63-1
+			for e in get_tree().get_nodes_in_group("Enemies"):
+				if not e.is_dead:
+					var d = global_position.distance_squared_to(e.global_position)
+					if d < closest_dist:
+						closest_enemy = e
+						closest_dist = d
+			if closest_enemy == null:
+				enemyArrow.hide()
+			else:
+				if closest_enemy != current_arrow_aiming_at:
+					last_aim_change = Time.get_ticks_msec() / 1000.0
+					arrowOpacity = 0.0
+				enemyArrow.show()
+				enemyArrow.global_rotation = global_position.angle_to_point(
+					closest_enemy.global_position
+				) + PI/2
+				current_arrow_aiming_at = closest_enemy
+	if Time.get_ticks_msec() / 1000.0 - last_aim_change > 3.0 and arrowOpacity < 1.0:
+		arrowOpacity = Time.get_ticks_msec() / 1000.0 - last_aim_change - 3.0
+	
 	carCollider.rotation = -car_angle
 	carSprite.rotation = -car_angle
 	carSquashFront.rotation = -car_angle
@@ -190,7 +251,12 @@ func _physics_process(delta):
 	_take_input()
 	_move(delta)
 	_update_camera_ahead_of_car(delta)
-
+	
+	if Input.is_action_just_pressed("kill_enemy"):
+		for e in get_tree().get_nodes_in_group("Enemies"):
+			if not e.is_dead:
+				e.take_damage(1000)
+				break
 
 func _on_car_hitbox_area_entered(area):
 	var par = area.get_parent()
