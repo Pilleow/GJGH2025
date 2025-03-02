@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://jrx140ici6yn"]
+
+[ext_resource type="AudioStream" uid="uid://chqrogcj42nx1" path="res://assets/sounds/sfx/rozwalanie.wav" id="1_1oma8"]
+[ext_resource type="Script" path="res://assets/scripts/autoload/sound_player.gd" id="1_of8s0"]
+[ext_resource type="AudioStream" uid="uid://crvex2i5eps3l" path="res://assets/sounds/sfx/rozwalanie2.wav" id="2_xci1y"]
+[ext_resource type="AudioStream" uid="uid://dc4j7j2rfkq5y" path="res://assets/sounds/sfx/rozwalanie3.wav" id="3_f15vu"]
+[ext_resource type="AudioStream" uid="uid://dvk83bvfabkfj" path="res://assets/sounds/sfx/rozwalanie4.wav" id="4_unkd3"]
+[ext_resource type="AudioStream" uid="uid://cjsiolbr12pqm" path="res://assets/sounds/sfx/strzał.wav" id="6_p31rs"]
+[ext_resource type="AudioStream" uid="uid://ci1p453yt2tom" path="res://assets/sounds/sfx/strzelanie laser.wav" id="7_7e1jd"]
+
+[node name="SoundPlayer" type="Node2D"]
+script = ExtResource("1_of8s0")
+
+[node name="RozwalenieEnemy1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_1oma8")
+
+[node name="RozwalenieEnemy2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xci1y")
+
+[node name="RozwalenieEnemy3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_f15vu")
+
+[node name="RozwalenieObiekt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_unkd3")
+volume_db = 6.7
+
+[node name="StrzalPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_p31rs")
+
+[node name="StrzalEnemy" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_7e1jd")
+volume_db = 5.98

@@ -158,6 +158,7 @@ func _update_interact_label():
 			interactLabel.text = "[X] Podnieś doładowanie"
 
 func _shoot_bullet(speed: float):
+	SoundPlayer.play("StrzalPlayer")
 	var b = bullet.instantiate()
 	var dx = sin(turretSprite.global_rotation)
 	var dy = -cos(turretSprite.global_rotation)

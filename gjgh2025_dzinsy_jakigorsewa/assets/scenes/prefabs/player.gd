@@ -23,7 +23,7 @@ var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
-var max_hp: float = 10.0
+var max_hp: float = 15.0
 var hp: float = max_hp
 
 var steering_angle = 0.0
@@ -51,6 +51,7 @@ var player_speed_interval = player_speed_interval_default
 @export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
+	SoundPlayer.set_camera_to(camera)
 	show()
 
 func _steer_set(sang: float):
@@ -164,8 +165,9 @@ func _update_camera_ahead_of_car(delta):
 	
 func _MotorSound():
 	motor_pitch = (abs(car_speed))/car_max_speed * motor_max_pitch
-	motor_pitch_scaled = (int(abs(car_speed) / 4)) % 40 + 20
-	motor_pitch = 2.5 * motor_pitch_scaled / 100;
+	var t = int(abs(car_speed) / 6)
+	motor_pitch_scaled = (t) % 40 + 0
+	motor_pitch = 1 + 1.5 * motor_pitch_scaled / 100;
 	
 	#if(motor_pitch >=  motor_max_pitch ):
 		#if(motor_gears < 5):
@@ -176,8 +178,8 @@ func _MotorSound():
 	if($AudioStreamPlayer2D.pitch_scale < 1.0):
 		$AudioStreamPlayer2D.pitch_scale = 1.0 
 		
-	if not $AudioStreamPlayer2D.playing:
-		$AudioStreamPlayer2D.play()
+	#if not $AudioStreamPlayer2D.playing:
+		#$AudioStreamPlayer2D.play()
 
 func _physics_process(delta):
 	carCollider.rotation = -car_angle
