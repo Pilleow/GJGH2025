@@ -12,7 +12,7 @@ var sat_down: bool = false
 var able_to_repair_car: bool = false
 var is_repairing: bool = false
 var repairing_time_left: float = 0.0
-var one_hp_repair_time: float = 0.5
+var one_hp_repair_time: float = 0.25
 
 var able_to_pickup_boost_location: int = 0
 
@@ -200,7 +200,7 @@ func _physics_process(delta):
 			is_repairing = false
 		repairing_time_left -= delta
 		if repairing_time_left <= 0:
-			car.hp += min(0.5, car.max_hp - car.unrecoverable_hp - car.hp)
+			car.hp += min(0.25, car.max_hp - car.unrecoverable_hp - car.hp)
 			car._update_hp_bar()
 			if car.hp < car.max_hp - car.unrecoverable_hp:
 				repairing_time_left = one_hp_repair_time

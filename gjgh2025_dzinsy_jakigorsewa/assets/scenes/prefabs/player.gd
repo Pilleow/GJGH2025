@@ -24,8 +24,8 @@ var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
 var max_hp: float = 15.0
-var hp: float = max_hp - 5.0
-var unrecoverable_hp: float = 2.0
+var hp: float = max_hp
+var unrecoverable_hp: float
 
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]

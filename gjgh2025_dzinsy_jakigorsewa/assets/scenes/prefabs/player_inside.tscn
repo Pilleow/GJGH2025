@@ -20,10 +20,10 @@ size = Vector2(41, 471.185)
 size = Vector2(41, 305)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7ynf"]
-size = Vector2(59.2639, 65.6418)
+size = Vector2(59.2639, 51.9507)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1je1p"]
-size = Vector2(63.0148, 43.5118)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jt2kk"]
+radius = 30.7948
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij582"]
 size = Vector2(191.673, 64.7037)
@@ -92,7 +92,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TurretChair/SitDownArea2D"]
-position = Vector2(-301.951, 61.5154)
+position = Vector2(-301.951, 54.6698)
 shape = SubResource("RectangleShape2D_q7ynf")
 
 [node name="Collider" type="StaticBody2D" parent="TurretChair"]
@@ -102,7 +102,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TurretChair/Collider"]
-shape = SubResource("RectangleShape2D_1je1p")
+shape = SubResource("CircleShape2D_jt2kk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretChair"]
 z_index = 45
@@ -326,7 +326,7 @@ rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_bhpyp")
 animation = &"idle"
-frame_progress = 0.637844
+frame_progress = 0.471715
 
 [connection signal="body_entered" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_entered"]
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]
