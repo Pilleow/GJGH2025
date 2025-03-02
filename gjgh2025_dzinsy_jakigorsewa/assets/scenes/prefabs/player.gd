@@ -1,11 +1,8 @@
 extends CharacterBody2D
 
 var defense_bubble_active = false
-
 var boost_car_accel_multiplier: float = 1.0
-  
 var enemiesToKill: int = 0
-
 
 var push_force = 0.0
 var push_force_max = 200
@@ -32,7 +29,7 @@ var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
 
-var max_hp: float = 12425.0
+var max_hp: float = 15.0
 var hp: float = max_hp 
 var unrecoverable_hp: float = 0.0
 
@@ -61,12 +58,9 @@ var player_speed_interval = player_speed_interval_default
 @onready var hpBarUnrecoverable: ProgressBar = $UI/ProgressBarUnrecoverable
 @onready var enemyArrow: Node2D = $ArrowContainer
 
-@export_file("*.tscn") var deadScenePath: String = ""
-
 func _ready_deferred():
 	enemiesToKill = len(get_tree().get_nodes_in_group("Enemies"))
 
-@export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
 	SoundPlayer.update_bgm("BGM1Start")
@@ -92,7 +86,9 @@ func handle_enemy_died():
 
 func _become_dead():
 	hide()
-	get_tree().change_scene_to_file(deadScenePath)
+	SoundPlayer.update_bgm("")
+	GlobalData.prev_scene = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file("res://assets/scenes/menu/dead.tscn")
 
 func take_damage(damage: float):
 	if defense_bubble_active:
@@ -169,8 +165,8 @@ func _move(timedelta: float):
 	
 func _take_input():
 	var acceleration = Input.get_axis("up", "down") * car_max_accel
-	if (abs(car_speed)) / car_max_speed - 0.5 > 0:
-		acceleration *= 1 - ((abs(car_speed)) / car_max_speed - 0.5)
+	if boost_car_accel_multiplier == 1.0 and (abs(car_speed)) / car_max_speed - 0.5 > 0:
+		acceleration *= 0.5 - ((abs(car_speed)) / car_max_speed - 0.5)
 	_accel_set(acceleration)
 	var rotation = Input.get_axis("left", "right")
 	_steer_set(rotation)

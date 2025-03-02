@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccp3sxj57ih18"]
+
+[ext_resource type="Script" path="res://assets/scenes/levels/turn_on_bgm_loop.gd" id="1_mslbi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vo4c0"]
+size = Vector2(450, 155)
+
+[node name="TurnOnBGMLoop" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_mslbi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 80)
+shape = SubResource("RectangleShape2D_vo4c0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

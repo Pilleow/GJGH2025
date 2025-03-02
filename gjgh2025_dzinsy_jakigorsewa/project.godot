@@ -11,15 +11,14 @@ config_version=5
 [application]
 
 config/name="GJGH2025_Dzinsy_Jakigorsewa"
-
 run/main_scene="res://assets/scenes/menu/menu.tscn"
-
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SoundPlayer="*res://assets/scripts/autoload/SoundPlayer.tscn"
+GlobalData="*res://assets/scripts/autoload/global_data.gd"
 
 [display]
 

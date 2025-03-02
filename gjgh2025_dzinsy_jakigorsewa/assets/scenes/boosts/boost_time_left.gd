@@ -27,4 +27,3 @@ func set_type(t: String):
 
 	elif t == "auto_repair_times":
 		$AutoRepairSprite2D.show()
-

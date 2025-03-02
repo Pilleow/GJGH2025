@@ -39,7 +39,7 @@ var boost_spawn_4_current_boost = null
 	"auto_repair_times"
 ]
 
-var time_every_boost_coming_in = 1.0
+var time_every_boost_coming_in = 4.0
 var next_boost_in_seconds: float = time_every_boost_coming_in
 
 func _ready():

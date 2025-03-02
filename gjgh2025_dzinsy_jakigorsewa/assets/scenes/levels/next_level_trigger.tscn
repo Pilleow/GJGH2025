@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccp4y3wmkytrn"]
+
+[ext_resource type="Script" path="res://assets/scenes/levels/next_level_trigger.gd" id="1_l2ks4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72rgs"]
+size = Vector2(362, 196)
+
+[node name="NextLevelTrigger" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_l2ks4")
+nextLevelPath = "res://assets/scenes/levels/level_2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1610
+position = Vector2(-404, -3169)
+shape = SubResource("RectangleShape2D_72rgs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -596.0
+offset_top = -3336.0
+offset_right = -208.0
+offset_bottom = -2894.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

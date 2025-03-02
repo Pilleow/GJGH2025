@@ -76,7 +76,7 @@ func _update_existing_boost_effects():
 	
 	for eff in current_active_boosts:
 		if eff[0] == "boost_car_accel_multiplier":
-			car.boost_car_accel_multiplier = 3.0
+			car.boost_car_accel_multiplier = 5.0
 		elif eff[0] == "boost_turret_shooting_speed":
 			boost_turret_shooting_speed = 2.0
 		elif eff[0] == "defense_bubble_active":
@@ -137,9 +137,9 @@ func _toggle_sit_down():
 
 func _put_boost_in_engine():
 	var time = {
-		"boost_car_accel_multiplier": 5.0,
-		"boost_turret_shooting_speed": 6.0,
-		"defense_bubble_active": 1.0,
+		"boost_car_accel_multiplier": 10.0,
+		"boost_turret_shooting_speed": 9.0,
+		"defense_bubble_active": 0.5,
 		"auto_repair_times": 2.0
 	}[current_holding_boost.boost_type]
 	add_boost_to_car(current_holding_boost.boost_type, time)
@@ -275,4 +275,3 @@ func _on_repair_area_2d_body_entered(body):
 func _on_repair_area_2d_body_exited(body):
 	if body.name == "PlayerInside":
 		able_to_repair_car = false
-

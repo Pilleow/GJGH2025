@@ -1,14 +1,10 @@
-
 [gd_scene load_steps=8 format=3 uid="uid://8qdifidrebcb"]
-
 
 [ext_resource type="Script" path="res://assets/scenes/boosts/boost_time_left.gd" id="1_rs8de"]
 [ext_resource type="Texture2D" uid="uid://ss66wwwotvvn" path="res://assets/sprites/objects/boost3.png" id="2_6758j"]
 [ext_resource type="Texture2D" uid="uid://1s5hnsl44lq6" path="res://assets/sprites/objects/boost4.png" id="3_to8qs"]
 [ext_resource type="Texture2D" uid="uid://covaj7h5odfv1" path="res://assets/sprites/objects/boost2.png" id="4_pg12m"]
-
 [ext_resource type="Texture2D" uid="uid://jwi0bl3w1g87" path="res://assets/sprites/objects/boost1.png" id="5_y6tw8"]
-
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v52y8"]
 bg_color = Color(0.133333, 0.129412, 0.141176, 1)

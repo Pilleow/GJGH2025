@@ -48,7 +48,6 @@ z_index = 1
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_y71k4")
-deadScenePath = "res://assets/scenes/menu/dead.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-478.8, 0)
@@ -109,6 +108,7 @@ position = Vector2(1, 50)
 shape = SubResource("RectangleShape2D_f53hj")
 
 [node name="UI" type="Control" parent="."]
+z_index = 2460
 layout_mode = 3
 anchors_preset = 0
 

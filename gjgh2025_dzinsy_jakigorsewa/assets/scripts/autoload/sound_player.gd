@@ -16,7 +16,8 @@ func update_bgm(n: String):
 	if current_bgm != "":
 		sounds[current_bgm].stop()
 	current_bgm = n
-	sounds[current_bgm].play()
+	if n != "":
+		sounds[current_bgm].play()
 
 func _ready():
 	for child in get_children():
