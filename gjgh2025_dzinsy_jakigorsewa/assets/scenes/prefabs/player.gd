@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var defense_bubble_active = false
-var boost_car_speed_multiplier: float = 1.0
+var boost_car_accel_multiplier: float = 1.0
   
 ## drifting -------------------------
 var push_force = 0.0
@@ -24,8 +24,8 @@ var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
 var max_hp: float = 15.0
-var hp: float = max_hp
-var unrecoverable_hp: float
+var hp: float = max_hp - 5.0
+var unrecoverable_hp: float = 2.0
 
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]
@@ -85,7 +85,7 @@ func take_damage(damage: float):
 	_update_hp_bar()
 
 func _accel_set(acc: float):
-	car_accel = acc
+	car_accel = acc * boost_car_accel_multiplier
 
 func _brake(force: float):
 	car_speed *= 1.0 - force * car_brake_efficiency

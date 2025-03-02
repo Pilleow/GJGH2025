@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://kvotmysyd2b6"]
+[gd_scene load_steps=6 format=3 uid="uid://kvotmysyd2b6"]
 
 [ext_resource type="Texture2D" uid="uid://ss66wwwotvvn" path="res://assets/sprites/objects/boost3.png" id="1_7mswv"]
 [ext_resource type="Script" path="res://assets/scenes/boosts/boost.gd" id="1_wth2b"]
 [ext_resource type="Texture2D" uid="uid://1s5hnsl44lq6" path="res://assets/sprites/objects/boost4.png" id="2_my0v8"]
 [ext_resource type="Texture2D" uid="uid://covaj7h5odfv1" path="res://assets/sprites/objects/boost2.png" id="4_kx4ek"]
+[ext_resource type="Texture2D" uid="uid://jwi0bl3w1g87" path="res://assets/sprites/objects/boost1.png" id="5_x0npo"]
 
 [node name="Boost" type="Node2D"]
 z_index = 120
@@ -21,3 +22,7 @@ texture = ExtResource("2_my0v8")
 [node name="DefenceBubbleSprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("4_kx4ek")
+
+[node name="AutoRepairSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_x0npo")

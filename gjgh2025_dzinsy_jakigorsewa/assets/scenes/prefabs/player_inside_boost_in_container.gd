@@ -32,9 +32,10 @@ var boost_spawn_4_current_boost = null
 @onready var nextBoostInProgressBar2 = $PlayerInsideUI/NextBoostIn2
 
 @onready var available_boosts_to_spawn = [
-	"boost_car_speed_multiplier",
+	"boost_car_accel_multiplier",
 	"boost_turret_shooting_speed",
-	"defense_bubble_active"
+	"defense_bubble_active",
+	"auto_repair_times"
 ]
 
 var time_every_boost_coming_in = 1.0

@@ -9,6 +9,7 @@ var turret_rotation_max_speed: float = 0.1
 var able_to_sit_down: bool = false
 var sat_down: bool = false
 
+var auto_repair_times: int = 0
 var able_to_repair_car: bool = false
 var is_repairing: bool = false
 var repairing_time_left: float = 0.0
@@ -70,18 +71,19 @@ func add_boost_to_car(boost: String, time: float):
 	_update_existing_boost_effects()
 
 func _update_existing_boost_effects():
-	car.boost_car_speed_multiplier = 1.0
+	car.boost_car_accel_multiplier = 1.0
 	boost_turret_shooting_speed = 1.0
 	
 	for eff in current_active_boosts:
-		if eff[0] == "boost_car_speed_multiplier":
-			car.boost_car_speed_multiplier = 2.0
-			# this should only boost the speed when the car player holds down a TURBO button!
+		if eff[0] == "boost_car_accel_multiplier":
+			car.boost_car_accel_multiplier = 3.0
 		elif eff[0] == "boost_turret_shooting_speed":
 			boost_turret_shooting_speed = 2.0
 		elif eff[0] == "defense_bubble_active":
 			car.defense_bubble_active = true
 			car.defenseBubble.show()
+		elif eff[0] == "auto_repair_times":
+			auto_repair_times += 8 
 
 func _update_boost_clocks(delta):
 	for index in len(current_active_boosts):
@@ -135,9 +137,10 @@ func _toggle_sit_down():
 
 func _put_boost_in_engine():
 	var time = {
-		"boost_car_speed_multiplier": 5.0,
+		"boost_car_accel_multiplier": 5.0,
 		"boost_turret_shooting_speed": 6.0,
-		"defense_bubble_active": 1.0
+		"defense_bubble_active": 1.0,
+		"auto_repair_times": 2.0
 	}[current_holding_boost.boost_type]
 	add_boost_to_car(current_holding_boost.boost_type, time)
 	current_holding_boost.call_deferred("queue_free")
@@ -195,17 +198,17 @@ func _physics_process(delta):
 	_update_interact_label()
 	_update_boost_clocks(delta)
 	
-	if is_repairing:
-		if not Input.is_action_pressed("designer_interact"):
-			is_repairing = false
+	if is_repairing and not Input.is_action_pressed("designer_interact"):
+		is_repairing = false
+	if (is_repairing or auto_repair_times) and car.hp < car.max_hp - car.unrecoverable_hp:
 		repairing_time_left -= delta
 		if repairing_time_left <= 0:
 			car.hp += min(0.25, car.max_hp - car.unrecoverable_hp - car.hp)
 			car._update_hp_bar()
-			if car.hp < car.max_hp - car.unrecoverable_hp:
-				repairing_time_left = one_hp_repair_time
-			else:
-				is_repairing = false
+			repairing_time_left = one_hp_repair_time
+			auto_repair_times -= 1
+	elif auto_repair_times > 0:
+		auto_repair_times = 0 
 	
 	if Input.is_action_just_pressed("designer_interact"):
 		_interact_with_environent()
