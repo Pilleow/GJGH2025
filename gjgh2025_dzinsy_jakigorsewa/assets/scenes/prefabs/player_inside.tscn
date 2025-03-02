@@ -326,7 +326,7 @@ rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_bhpyp")
 animation = &"idle"
-frame_progress = 0.471715
+frame_progress = 0.0491647
 
 [connection signal="body_entered" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_entered"]
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]

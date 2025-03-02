@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=16 format=4 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cteqlc4k64d0s" path="res://assets/sprites/other/przodl_pasek.png" id="6_x4l3b"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_squash.gd" id="7_h7vgg"]
 [ext_resource type="Texture2D" uid="uid://cysbxkdh7f25v" path="res://assets/sprites/other/light.png" id="8_fg8o7"]
+[ext_resource type="Texture2D" uid="uid://b0oipshhs1tt0" path="res://assets/sprites/other/arrow.png" id="8_wfvqf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h14n"]
 size = Vector2(64, 189)
@@ -160,6 +161,15 @@ visible = false
 position = Vector2(1, -122)
 texture = ExtResource("8_fg8o7")
 texture_scale = 4.0
+
+[node name="ArrowContainer" type="Node2D" parent="."]
+position = Vector2(0, -48)
+
+[node name="Arrow" type="Sprite2D" parent="ArrowContainer"]
+modulate = Color(1, 1, 1, 0.72549)
+position = Vector2(0, -140)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("8_wfvqf")
 
 [connection signal="area_entered" from="CarHitbox" to="." method="_on_car_hitbox_area_entered"]
 [connection signal="body_entered" from="EnemySquash" to="EnemySquash" method="_on_body_entered"]

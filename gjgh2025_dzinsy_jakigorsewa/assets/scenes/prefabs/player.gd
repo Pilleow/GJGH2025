@@ -3,16 +3,17 @@ extends CharacterBody2D
 var defense_bubble_active = false
 var boost_car_accel_multiplier: float = 1.0
   
-## drifting -------------------------
 var push_force = 0.0
 var push_force_max = 200
 var drift_brake_speed = 6.0;
 var push_velocity = Vector2.ZERO;
 var drifting = false;
 
+var updateArrowEvery = 0.1
+var waitUntilUpdateArrow = updateArrowEvery
+
 var angle1 = 0.0
 var prev_angle1 = 0.0
-## drifting ^^^^-------------------------
 
 var car_angle = 0.0
 var car_accel = 0.0
@@ -49,6 +50,7 @@ var player_speed_interval = player_speed_interval_default
 @onready var camera: Camera2D = $Camera2D
 @onready var hpBar: ProgressBar = $UI/ProgressBar
 @onready var hpBarUnrecoverable: ProgressBar = $UI/ProgressBarUnrecoverable
+@onready var enemyArrow: Node2D = $ArrowContainer
 
 @export_file("*.tscn") var deadScenePath: String = ""
 
@@ -190,6 +192,27 @@ func _MotorSound():
 		#$AudioStreamPlayer2D.play()
 
 func _physics_process(delta):
+	waitUntilUpdateArrow -= delta
+	if waitUntilUpdateArrow <= 0:
+		waitUntilUpdateArrow = updateArrowEvery
+		var closest_enemy = null
+		var closest_dist = 2**63-1
+		for e in get_tree().get_nodes_in_group("Enemies"):
+			if e.is_dead:
+				return
+			var d = global_position.distance_squared_to(e.global_position)
+			if d < closest_dist:
+				closest_enemy = e
+				closest_dist = d
+		print(closest_dist)
+		if closest_enemy == null:
+			enemyArrow.hide()
+		else:
+			enemyArrow.show()
+			enemyArrow.global_rotation = global_position.angle_to_point(
+				closest_enemy.global_position
+			) + PI/2
+	
 	carCollider.rotation = -car_angle
 	carSprite.rotation = -car_angle
 	carSquashFront.rotation = -car_angle
