@@ -88,6 +88,9 @@ func _shoot(delta):
 	get_tree().current_scene.add_child(b)
 	
 func _become_dead():
+	if is_dead:
+		return
+	player.handle_enemy_died()
 	is_dead = true
 	animSprite.play("dead")
 	var toward_player = (player.global_position - global_position).normalized()  * 1000
