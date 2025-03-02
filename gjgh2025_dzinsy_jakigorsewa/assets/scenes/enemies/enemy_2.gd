@@ -122,7 +122,7 @@ func _move(disable_voluntary_movement: bool = false):
 			cos(Time.get_ticks_msec() / 1000) * 120
 		)
 	if knockback_move:
-		knockback_move *= 0.9
+		knockback_move *= 0.92
 	if not playingShootAnimation and not is_dead:
 		animSprite.play("idle")
 	move_and_slide()
