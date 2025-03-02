@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://wbedxm7a3xyo"]
+[gd_scene load_steps=14 format=4 uid="uid://da7tibnpsxqv6"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="1_gk8qh"]
 [ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_5hpi8"]
@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="9_yhdhd"]
 [ext_resource type="PackedScene" uid="uid://c0xblj8h06yyn" path="res://assets/scenes/enemies/Enemy2.tscn" id="10_as51b"]
 [ext_resource type="PackedScene" uid="uid://blls8ihuvhaef" path="res://assets/scenes/enemies/Enemy3.tscn" id="11_6wov5"]
-[ext_resource type="PackedScene" uid="uid://ccp4y3wmkytrn" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_b4xeh"]
-[ext_resource type="PackedScene" uid="uid://ccp3sxj57ih18" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_s83cs"]
+[ext_resource type="PackedScene" path="res://assets/scenes/levels/next_level_trigger.tscn" id="12_b4xeh"]
+[ext_resource type="PackedScene" path="res://assets/scenes/levels/turn_on_bgm_loop.tscn" id="13_s83cs"]
 
 [node name="Level1" type="Node2D"]
 position = Vector2(0, -3)

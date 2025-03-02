@@ -11,3 +11,8 @@ func _on_button_pressed():
 func _physics_process(delta):
 	if Input.is_action_just_pressed("space"):
 		_start_game()
+
+
+func _on_button_2_pressed():
+	GlobalData.prev_scene = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file("res://assets/scenes/levels/level_1.tscn")
