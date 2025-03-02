@@ -1,9 +1,10 @@
 [gd_scene load_steps=12 format=4 uid="uid://dr0ww0mu7dxli"]
 
 [ext_resource type="PackedScene" uid="uid://dobifcj0tqndl" path="res://assets/scenes/prefabs/player.tscn" id="2_nc23y"]
-[ext_resource type="TileSet" uid="uid://bbj3rgyp8kke8" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
+[ext_resource type="TileSet" uid="uid://cxp7yy2rlldg1" path="res://assets/scenes/prefabs/mainTileset.tres" id="2_u7lgk"]
 [ext_resource type="PackedScene" uid="uid://c6mrn4vuxcmgh" path="res://assets/scenes/enemies/Enemy1.tscn" id="3_qlpo8"]
 [ext_resource type="Texture2D" uid="uid://b5loktdwhky8h" path="res://assets/sprites/character/background.png" id="5_j1ga3"]
+
 [ext_resource type="PackedScene" uid="uid://b4yh0f01v45v8" path="res://assets/scenes/prefabs/objects/krzeslo/krzeslo.tscn" id="6_8i5ql"]
 [ext_resource type="PackedScene" uid="uid://pjkpvqmwg8g2" path="res://assets/scenes/prefabs/objects/skrzynka/box.tscn" id="6_may06"]
 [ext_resource type="PackedScene" uid="uid://selpyftufxsg" path="res://assets/scenes/prefabs/objects/szafka/szafka.tscn" id="7_v8yeo"]
@@ -410,6 +411,7 @@ rotation = -1.0841
 z_index = 4096
 
 [node name="Node2D6" parent="EnemyContainer" instance=ExtResource("3_qlpo8")]
+
 position = Vector2(-456, 1731)
 
 [node name="Node2D7" parent="EnemyContainer" instance=ExtResource("3_qlpo8")]
@@ -435,6 +437,7 @@ position = Vector2(-274, -2670)
 
 [node name="Node2D12" parent="EnemyContainer" instance=ExtResource("3_qlpo8")]
 position = Vector2(-1380, -2549)
+
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

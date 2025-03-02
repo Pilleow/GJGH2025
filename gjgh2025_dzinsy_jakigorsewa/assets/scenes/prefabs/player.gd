@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
 var defense_bubble_active = false
+
 var boost_car_accel_multiplier: float = 1.0
   
 var enemiesToKill: int = 0
+
 
 var push_force = 0.0
 var push_force_max = 200
@@ -29,9 +31,11 @@ var car_velocity = Vector2.ZERO
 var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
+
 var max_hp: float = 12425.0
 var hp: float = max_hp 
 var unrecoverable_hp: float = 0.0
+
 
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]
@@ -61,6 +65,8 @@ var player_speed_interval = player_speed_interval_default
 
 func _ready_deferred():
 	enemiesToKill = len(get_tree().get_nodes_in_group("Enemies"))
+
+@export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
 	SoundPlayer.update_bgm("BGM1Start")
@@ -94,8 +100,10 @@ func take_damage(damage: float):
 		damage /= 2.0
 		damage = float(int(damage))
 		defenseBubble.hide()
+
 	elif unrecoverable_hp < max_hp - 5.0:
 		unrecoverable_hp += damage / 6.0
+
 	hp -= damage
 	if hp <= 0:
 		_become_dead()

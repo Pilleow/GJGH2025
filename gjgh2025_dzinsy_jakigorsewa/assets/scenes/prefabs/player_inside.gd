@@ -153,10 +153,12 @@ func _interact_with_environent():
 		_put_boost_in_engine()
 	if boostInContainer.has_boost_in_location(able_to_pickup_boost_location):
 		boostInContainer.take_boost_from_location(able_to_pickup_boost_location)
+
 	if able_to_repair_car and car.hp < car.max_hp - car.unrecoverable_hp:
 		is_repairing = true
 		repairing_time_left = one_hp_repair_time
 		animSprite.play("repairing")
+
 
 func _update_interact_label():
 	interactLabel.text = ""
@@ -175,6 +177,7 @@ func _update_interact_label():
 			interactLabel.text = "[X] Napraw autko"
 		else:
 			interactLabel.text = "Nie da się więcej naprawić"
+
 
 func _shoot_bullet(speed: float):
 	SoundPlayer.play("StrzalPlayer", randf_range(0.8, 1.2))
@@ -272,3 +275,4 @@ func _on_repair_area_2d_body_entered(body):
 func _on_repair_area_2d_body_exited(body):
 	if body.name == "PlayerInside":
 		able_to_repair_car = false
+

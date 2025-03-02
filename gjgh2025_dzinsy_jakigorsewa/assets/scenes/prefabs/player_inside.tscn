@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=23 format=3 uid="uid://diu4q6now4xlo"]
+
 
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside_container.gd" id="1_duc1h"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player_inside.gd" id="1_t53x0"]
@@ -82,6 +84,45 @@ shape = SubResource("RectangleShape2D_jjm1u")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(-133.158, -1.15866)
 shape = SubResource("RectangleShape2D_67w1b")
+
+[node name="PlayerInside" type="CharacterBody2D" parent="."]
+z_index = 4096
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_t53x0")
+boostTimerBarPath = "res://assets/scenes/boosts/boostTimeLeft.tscn"
+bulletPath = "res://assets/scenes/prefabs/playerBullet.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInside"]
+z_index = 2095
+position = Vector2(-298, 1)
+shape = SubResource("CircleShape2D_rtmai")
+
+[node name="Label" type="Label" parent="PlayerInside"]
+z_index = 2785
+texture_filter = 3
+offset_left = -385.971
+offset_top = -67.1418
+offset_right = -209.971
+offset_bottom = -44.1418
+theme_override_colors/font_color = Color(1, 0.694748, 0.678092, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_wao8u")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="AnimatedSprite2DContainer" type="Node2D" parent="PlayerInside"]
+z_index = 4096
+position = Vector2(-297.824, 1.12528)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerInside/AnimatedSprite2DContainer"]
+z_index = 4096
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("2_bhpyp")
+animation = &"idle"
 
 [node name="TurretChair" type="Node2D" parent="."]
 z_index = -25
@@ -332,8 +373,10 @@ frame_progress = 0.0491647
 [connection signal="body_exited" from="TurretChair/SitDownArea2D" to="PlayerInside" method="_on_sit_down_area_2d_body_exited"]
 [connection signal="body_entered" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_entered"]
 [connection signal="body_exited" from="Engine/EngineArea2D" to="PlayerInside" method="_on_engine_area_2d_body_exited"]
+
 [connection signal="body_entered" from="Repair/RepairArea2D" to="PlayerInside" method="_on_repair_area_2d_body_entered"]
 [connection signal="body_exited" from="Repair/RepairArea2D" to="PlayerInside" method="_on_repair_area_2d_body_exited"]
+
 [connection signal="body_entered" from="BoostInContainer/BoostIn1/BoostInArea2D" to="PlayerInside" method="_on_boost1_in_area_2d_body_entered"]
 [connection signal="body_exited" from="BoostInContainer/BoostIn1/BoostInArea2D" to="PlayerInside" method="_on_boost1_in_area_2d_body_exited"]
 [connection signal="body_entered" from="BoostInContainer/BoostIn2/BoostInArea2D" to="PlayerInside" method="_on_boost2_in_area_2d_body_entered"]
