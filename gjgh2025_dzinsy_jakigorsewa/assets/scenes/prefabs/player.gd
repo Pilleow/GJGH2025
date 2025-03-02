@@ -24,7 +24,8 @@ var car_brake_efficiency = 0.05
 var car_ground_friction = 0.02
 
 var max_hp: float = 15.0
-var hp: float = max_hp
+var hp: float = max_hp - 5.0
+var unrecoverable_hp: float = 2.0
 
 var steering_angle = 0.0
 var steering_angle_limit = [-360.0, 360.0]
@@ -47,12 +48,18 @@ var player_speed_interval = player_speed_interval_default
 @onready var carHitbox: Area2D = $CarHitbox
 @onready var camera: Camera2D = $Camera2D
 @onready var hpBar: ProgressBar = $UI/ProgressBar
+@onready var hpBarUnrecoverable: ProgressBar = $UI/ProgressBarUnrecoverable
 
 @export_file("*.tscn") var deadScenePath: String = ""
 
 func _ready():
 	SoundPlayer.set_camera_to(camera)
+	_update_hp_bar()
 	show()
+
+func _update_hp_bar():
+	hpBar.value = hp / max_hp * 100.0 
+	hpBarUnrecoverable.value = (max_hp - unrecoverable_hp) / max_hp * 100.0
 
 func _steer_set(sang: float):
 	if sang < steering_angle_limit[0] or sang > steering_angle_limit[1]:
@@ -70,11 +77,12 @@ func take_damage(damage: float):
 		damage /= 2.0
 		damage = float(int(damage))
 		defenseBubble.hide()
-	print(damage)
+	elif unrecoverable_hp < max_hp - 5.0:
+		unrecoverable_hp += damage / 6.0
 	hp -= damage
 	if hp <= 0:
 		_become_dead()
-	hpBar.value = hp / max_hp * 100.0
+	_update_hp_bar()
 
 func _accel_set(acc: float):
 	car_accel = acc

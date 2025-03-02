@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dobifcj0tqndl"]
+[gd_scene load_steps=15 format=4 uid="uid://dobifcj0tqndl"]
 
 [ext_resource type="Texture2D" uid="uid://c80b8bxl4t3t8" path="res://assets/sprites/character/player.png" id="1_vsbl2"]
 [ext_resource type="Script" path="res://assets/scenes/prefabs/player.gd" id="1_y71k4"]
@@ -14,8 +14,21 @@ size = Vector2(64, 189)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f53hj"]
 size = Vector2(62, 9)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j72cw"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6e46"]
 bg_color = Color(0.756863, 0.0705882, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfc5l"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g5bj"]
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -104,8 +117,21 @@ offset_left = -552.0
 offset_top = -670.0
 offset_right = 165.0
 offset_bottom = -633.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_j72cw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_p6e46")
-value = 100.0
+value = 50.0
+show_percentage = false
+
+[node name="ProgressBarUnrecoverable" type="ProgressBar" parent="UI"]
+z_index = -85
+layout_mode = 0
+offset_left = -551.0
+offset_top = -670.0
+offset_right = 166.0
+offset_bottom = -633.0
+theme_override_styles/background = SubResource("StyleBoxFlat_rfc5l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8g5bj")
+value = 75.0
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="UI"]
