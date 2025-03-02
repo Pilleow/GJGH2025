@@ -89,6 +89,7 @@ rotation = -0.000720069
 [node name="Krzeslo2" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(-169, -865)
 rotation = -1.71632
+scale = Vector2(1, 1)
 
 [node name="Krzeslo3" parent="ObjectContainer" instance=ExtResource("6_8i5ql")]
 position = Vector2(160, -860)
@@ -139,6 +140,7 @@ position = Vector2(1, -753)
 [node name="LawkaDrewno2" parent="ObjectContainer" instance=ExtResource("9_fa4xu")]
 position = Vector2(-225, -820)
 rotation = 0.951753
+scale = Vector2(1, 1)
 
 [node name="LawkaDrewno3" parent="ObjectContainer" instance=ExtResource("9_fa4xu")]
 position = Vector2(223, -822)
@@ -147,10 +149,10 @@ rotation = -1.0841
 [node name="EnemyContainer" type="Node2D" parent="."]
 
 [node name="Node2D6" parent="EnemyContainer" instance=ExtResource("3_qlpo8")]
-position = Vector2(985, -876)
+position = Vector2(-99, -1341)
 
 [node name="Node2D" parent="EnemyContainer" instance=ExtResource("5_j6xy4")]
-position = Vector2(1092, -1225)
+position = Vector2(142, -1334)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
